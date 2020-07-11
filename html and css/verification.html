@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="user signinbox">
+                <div class="imagebox"><img src="{% static 'css/images/Signup2.jpeg' %}" alt=""></div>
+                <div class="formbox">
+                    <form action="verification" method="POST">
+                        {% csrf_token %}
+                        <h2>>EMAIL VERIFICATION</h2>
+                        <input type="text" placeholder="PhoneNumber" name="otp">
+                        <button type="submit">Signup</button>
+                        <p class="signup">login and enjoy reading <a href="login">LOGIN</a></p>
+                        <div>
+                            {% for message in messages%}
+                            <span class="message">{{message}}</span>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+            
+            </div>
+            
+        </div>
+    </section>
+</body>
+</html>
