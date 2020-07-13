@@ -86,7 +86,7 @@
                     <div class="cta">
                         <a href="createpost" class="btn">New Post</a> <span>&#47;</span>
 
-                        <a href="#" class="btn">Your Posts</a>
+                        <a href="myposts" class="btn">Your Posts</a>
                     </div>
                 </div>
             </div>
@@ -144,8 +144,8 @@
                             {% else %}
                             <a href="/error" class="btn">READ MORE</a>
                             {% endif %}
-
-                        </p>
+                        </p> 
+                        Author:{{Post.user.get_full_name}}
                     </div>
                     
                     {% endfor %}
@@ -220,7 +220,9 @@
     <footer>
         <p>&copy; 2019 Website. All rights reserved</p>
     <script type="text/javascript" src="{% static 'css/scripts.js' %}"></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0" nonce="0sCNw50t"></script>
     </footer>
-    
+    {{ request.build_absolute_uri }}
 </body>
 </html>

@@ -8,8 +8,10 @@ from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 from .models import Post
 import requests
+from django.db import models
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from .form import PostForm
 
 def homepage(request):
     post=Post.objects.all()
@@ -23,11 +25,10 @@ def homepage(request):
             Q(content__icontains=query)
             ).distinct()
 
-    paginator = Paginator(post_list, 1) # Show 25 contacts per page.
+    paginator = Paginator(post_list, 10) # Show 25 contacts per page.
     
     page_number = request.GET.get('page')
     post = paginator.get_page(page_number)
-
     return render(request,'index.html',{'post':post})
 
 def signup(request):
@@ -91,7 +92,7 @@ def login(request):
         if user is not None:
             auth.login(request,user)
           
-            return redirect("/homepage")
+            return redirect("/")
             
         else:
             messages.info(request,'invalid phone or password')
@@ -107,10 +108,11 @@ def createpost(request):
         template = request.POST["template"]
         content = request.POST["content"]
         email = request.POST["email"]
+        user = request.user
         print(title , template ,content) 
-        instance = Post(title=title,template_name=template,content=content,email=email)
+        instance = Post(title=title,template_name=template,content=content,email=email,user=user)
         instance.save()       
-        return redirect('homepage')
+        return redirect('/myposts')
        
     else:
         return render(request,'post.html')
@@ -127,5 +129,57 @@ def postdetail(request,slug=None):
             "instance": instance,
         }
         return render(request,"detail.html",context)
+def myposts(request):
+    if request.user.is_authenticated:
+        print(request.user)
+        post=Post.objects.filter(user=request.user)
+        return render(request,"myposts.html",{'post':post})
+    else:
+        return redirect('/error')
+def othersposts(request,user=None):
+    post=Post.objects.filter(email=user)
+    user=User.objects.filter(email=user)
+    context = {
+            
+            "post":post,
+            "user":user
+        }
+    print(post)
+    return render(request,"others.html",context)
+def editpost(request,slug=None):
+    if request.method == "POST":
+        instance = get_object_or_404(Post,slug=slug)
+        print(instance)
+        context = {
+            "title": instance.title,
+            "instance": instance,
+        }
+        print(instance.content)
+        
+        return render(request,'edit.html',context)
+    else:
+        return redirect('/error')
+  
+def save(request,slug=None):
+    if request.method == "POST":
+        instance = get_object_or_404(Post,slug=slug)
+        instance.delete()
+        title = request.POST["title"]
+        template = request.POST["template"]
+        content = request.POST["content"]
+        email = request.POST["email"]
+        user = request.user
+        instance = Post(title=title,template_name=template,content=content,email=email,user=user,slug=slug)
+        instance.save()
+        return redirect('/'+str(slug)+'/post-detail' )
+    else:
+        return redirect('/error')
+def deletepost(request,slug=None):
+    if request.method == "POST":
+        instance = get_object_or_404(Post,slug=slug)
+        instance.delete()
+        return redirect('/myposts')
+    else:
+        return redirect('/error')
 def error(request):
     return render(request,'error.html')

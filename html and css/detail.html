@@ -5,28 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% if instance.template_name == 'style1'  %}
     <link rel="stylesheet" href=" {% static 'css/assets3/css/main.css'  %} " />
+    {%else %}
+    {% endif %}
 </head>
 <style>
     .logo{
         font-size: 4rem;
         color: ghostwhite;
-        
+        font-weight: 300px;
     }
+   
     
 </style>
 <body>
-    {{instance.title}} <br>
-    {{instance.content}}
-    {% if instance.template_name == 'style2'  %}
-    sss
-    {%else %}
-    nn
-    {% endif %}
-
+    
 <!-- Header -->
 <header id="header">
-    <div class="logo">Blog<a href="#"><span>by dheeraj</span></a></div>
+    <div class="logo">Blog
+        <a href="#"><h5>{{instance.user.get_full_name}}</></a></div>
 </header>
 
 <!-- Main -->
@@ -44,21 +42,10 @@
                                 <h3>Topic1</h3>
                                 <div class="7u$ 12u$(medium)">
                                     <!-- Image -->
-                                        <span class="image fit"><img src="images/pic01.jpg" alt="" /></span>
-
-                        
-
+                                        <span class="image fit"><img src="" alt="" /></span>
                                 </div>
                                 <p>
-                                    AVNI results vachaka,thana intlo paristhulu kuda balekapovadam valla thanaki pelli chedam ani anukuntu untaru. Ah sandarbam lo oka manchi sambandam vachindi inka SULOCHANA garu vala valatho matladi,alochinchi ah sambandam ni oppukuntunnaru.
-
-Ah vayasu lo AVNI ki emi telidu, pelli ante enti,pelli ayyaka ammayi abbayi vala intiki veladam akkada undadam ala enno vishayalu edi telidu. Ayna pelli chesi AVNI ni pampinchestharu, AVNI vala bhartha peru ABHAY. ABHAY ki AVNI ki okari gurinchi okariki emi telidu , pedda vallu chusaru,valake nacharu,vallu matladukoni pelli chesesaru.AVNI kante ABHAY oka 7-8 samvasralu pedda.
-
-AVNI ni oka pedda kutumbam lo unde ABHAY ki ichi pelli chesaru, inka AVNI ki edi telidu kada, akkada em cheyalo ela undalo kuda teliyakapoyedi,akkada kuda enno panulu chesthu unna, enno matalu padedi ah intlo unde pedda valatho. AVNI enno sarlu edchedi,entho badha padthu undedi, valla amma vallu eppudu vachina thanani teskellamani eppudu brathimiladedi, inka mella mellaga anni alavatu cheskundi.
-
-ABHAY kuda AVNI ni antha baga chuskunevadu kadu,inka cheppali ante thanani antha patinchukune vare kadu ayna alage sahisthu undedi.Samayam gadeche koddi, AVNI garbhavathi avthundi, thanaki oka chakkani,bulli,chinni,muddu papa puttindi.Ah papa thana jeevitham loki vachinappati nunchi thana jeevitham lo okati okati maruthu anandam ane kotha anubhuthi vachindi.Ah pape thana jeevitham ni marusthundi ani chala gattiga nammindi AVNI.Ah papa peru ABHIGNYA, ah papa ki 5-6 samvasrala vayasu lo unnapudu AVNI ki oka babu pudthadu.
-
-Pillale prapancham ga brathukuthunna AVNI ki anukokunda oka roju.... 
+                                   {{instance.content}}
                                 </p>
                                 <hr />
                                 
@@ -72,6 +59,7 @@ Pillale prapancham ga brathukuthunna AVNI ki anukokunda oka roju....
                     
                 </div>
 
+                <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5" data-width=""></div>
             </div>
         </div>
 </section>
@@ -92,6 +80,8 @@ Pillale prapancham ga brathukuthunna AVNI ki anukokunda oka roju....
 </footer>
 
 <!-- Scripts -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0" nonce="rkvu3IFy"></script>
 <script src=" {% static 'css/assets3/js/jquery.min.js' %} "></script>
 <script src="   {% static 'css/assets3/js/jquery.poptrox.min.js' %} "></script>
 <script src="   {% static 'css/assets/js/skel.min.js' %} "></script>
