@@ -16,10 +16,11 @@
                     <form action="signup" method="POST">
                         {% csrf_token %}
                         <h2>SIGN UP</h2>
-                        <input type="text" placeholder="FirstName" required name="first">
-                        <input type="text" placeholder="LastName" required name="last">
+                        <input type="text" placeholder="Username" required name="username">
+                        <input type="text" placeholder="FirstName" onkeyup="letters(this)" required name="first">
+                        <input type="text" placeholder="LastName" onkeyup="letters(this)" required name="last">
                         <input type="email" placeholder="Email_Id" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required name="email"  name="email">
-                        <input type="text" placeholder="PhoneNumber" name="phone">
+                        <input type="text" placeholder="PhoneNumber" pattern="[6-9]{1}[0-9]{9}" name="phone">
                         <input type="password" placeholder="Password" required name="password">
                         <button type="submit">Signup</button>
                         <p class="signup">login and enjoy reading <a href="login">LOGIN</a></p>
@@ -35,5 +36,13 @@
             
         </div>
     </section>
+    <script>
+                        
+        function letters(letters){
+            var regex = /[^a-z]/gi;
+            letters.value = letters.value.replace(regex,"");
+        }
+     
+    </script>
 </body>
 </html>

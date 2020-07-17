@@ -1,14 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0" nonce="JsMbE7Nd"></script>
-Step 2: Place this code wherever you want the plugin to appear on your page.
-<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
-</body>
-</html>
+<div class="dragArea row">
+	<div class="col-md-4  form-group" data-for="name">
+		<label for="name-form1-n" class="form-control-label mbr-fonts-style display-7">Title</label>
+		<input type="text" name="title" data-form-field="Name" required="required" class="form-control display-7" id="name-form1-n" value="{{instance.title}}">
+	</div>
+	<div class="col-md-4  form-group" data-for="email">
+		<label for="email-form1-n" class="form-control-label mbr-fonts-style display-7" hidden>Email</label>
+		<input type="email" name="email" data-form-field="Email"  class="form-control display-7" id="email-form1-n" value={{user.email}} readonly  hidden>
+		<input type="text" name="template" value="{{instance.template}}" required hidden>
+	</div>
+	<div class="col-md-4  form-group" data-for="name">
+		<label for="name-form1-n" class="form-control-label mbr-fonts-style display-7">Heading1</label>
+		<input type="text" name="heading1" data-form-field="Name"  class="form-control display-7"  id="name-form1-n"  value="{{instance.heading1}} ">
+	</div>
+	<div data-for="message" class="col-md-12 form-group">
+		<label for="message-form1-n" class="form-control-label mbr-fonts-style display-7">First Para</label>
+		<textarea name="para" data-form-field="Message" class="form-control display-7" id="message-form1-n"> {{instance.para1}} </textarea>
+	</div>
+	<div data-for="message" class="col-md-12 form-group">
+		<label for="message-form1-n" class="form-control-label mbr-fonts-style display-7">Content of Blog</label>
+		<textarea name="content" data-form-field="Message" class="form-control display-7" id="message-form1-n" required> {{instance.content}} </textarea>
+	</div>
+	<div class="col-md-4  form-group" data-for="name">
+		<label for="name-form1-n" class="form-control-label mbr-fonts-style display-7">Heading2</label>
+		<input type="text" name="heading2" data-form-field="Name"  class="form-control display-7" id="name-form1-n" value="{{instance.heading2}}">
+	</div>
+	<div data-for="message" class="col-md-12 form-group">
+		<label for="message-form1-n" class="form-control-label mbr-fonts-style display-7">Heading2s Content</label>
+		<textarea name="content1" data-form-field="Message" class="form-control display-7" id="message-form1-n" >{{instance.content1}}</textarea>
+	</div>
+	<div class="col-md-4  form-group" data-for="name">
+		<label for="name-form1-n" class="form-control-label mbr-fonts-style display-7">Heading3</label>
+		<input type="text" name="heading3" data-form-field="Name"  class="form-control display-7" id="name-form1-n" value=" {{instance.heading3}} " >
+	</div>
+	<div data-for="message" class="col-md-12 form-group">
+		<label for="message-form1-n" class="form-control-label mbr-fonts-style display-7">Heading3s Content</label>
+		<textarea name="content2" data-form-field="Message" class="form-control display-7" id="message-form1-n"> {{instance.content2}} </textarea>
+	</div>
+	<div class="col-md-4  form-group" data-for="name">
+		<label for="name-form1-n" class="form-control-label mbr-fonts-style display-7">Heading4</label>
+		<input type="text" name="heading4" data-form-field="Name"  class="form-control display-7" id="name-form1-n" value="{{instance.heading4}}">
+	</div>
+	<div data-for="message" class="col-md-12 form-group">
+		<label for="message-form1-n" class="form-control-label mbr-fonts-style display-7">Heading4s Content</label>
+		<textarea name="content3" data-form-field="Message" class="form-control display-7" id="message-form1-n"> {{instance.content3}} </textarea>
+	</div>
+</div>
