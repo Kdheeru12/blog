@@ -54,7 +54,7 @@ def signup(request):
             'Hello '  + first_name+ '  thanks for registering to the website otp for login is'+ str(otp),
             'noreply@gmail.com',
             [email,'dheerukreddy@gmail.com'],
-            fail_silently=True,
+        
             )
 
             return redirect('verification')

@@ -127,7 +127,7 @@ MEDIA_URL = '/media/'
 
 EMAIL_HOST = 'smtp.gmail.com'
 
-EMAIL_HOST_USER = 'letsconnectsociety@gmail.com'
+EMAIL_HOST_USER = 'noreply.blozz@gmail.com'
 
 EMAIL_HOST_PASSWORD = 'Kmunna122001'
 

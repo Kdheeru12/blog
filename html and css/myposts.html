@@ -465,12 +465,11 @@ button:focus+.design-container {
           <div class="card-front">
             <figure>
              
-              <figcaption>{{Post.title}}</figcaption>
+              <figcaption>{{Post.title|truncatechars:26}}</figcaption>
             </figure>
       
                 <p>
-                    {{Post.content}}
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta voluptatibus atque perferendis, ratione modi, id aperiam, quae rerum officiis eum inventore facilis illo quisquam impedit repudiandae tempora totam dolorum tenetur.
+                    {{Post.content|truncatechars:200}}
                     <br>
                     <span>
                         Author:{{Post.user.get_full_name}}

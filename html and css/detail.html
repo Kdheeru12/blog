@@ -99,7 +99,7 @@
                                         <span class="image fit"><img src="" alt="" /></span>
                                 </div>
                                 <p>
-                                   {{instance.content}}
+                                   {{instance.content|linebreaks}}
                                 </p>
                                 <hr />
                                 {{total_likes }} likes
@@ -305,12 +305,12 @@
                     </p>
                     {% else %}
                     <p class="lead">
-                        {{instance.para1}}
+                        {{instance.para1|linebreaks}}
                     </p>
                     {% endif %}
                   
                     <p>
-                        {{instance.content}}
+                        {{instance.content|linebreaks}}
                     </p>
                 
 
@@ -328,7 +328,7 @@
                             </p>
                             {% else %}
                             <p>
-                                {{instance.content1}}
+                                {{instance.content1|linebreaks}}
                             </p>
                             {% endif %}
                         
@@ -347,7 +347,7 @@
                             </p>
                             {% else %}
                             <p>
-                                {{instance.content2}}
+                                {{instance.content2|linebreaks}}
                             </p>
                             {% endif %}
                         
@@ -591,7 +591,7 @@
                     <div class="entry__content">
                         
                         <p>
-                            {{instance.content}}
+                            {{instance.content|linebreaks}}
                         </p>
                     
                     </div> 
@@ -616,7 +616,7 @@
                         </p>
                         {% else %}
                         <p>
-                            {{instance.content1}}
+                            {{instance.content1|linebreaks}}
                         </p>
                         {% endif %}
                     
@@ -647,7 +647,7 @@
                         </p>
                         {% else %}
                         <p>
-                            {{instance.content2}}
+                            {{instance.content2|linebreaks}}
                         </p>
                         {% endif %}
                     </div> 
@@ -678,7 +678,7 @@
                         </p>
                         {% else %}
                         <p>
-                            {{instance.content3}}
+                            {{instance.content3|linebreaks}}
                         </p>
                         {% endif %}
                     </div> 
@@ -923,11 +923,11 @@
                         </p>
                         {% else %}
                         <p class="lead">
-                            {{instance.para1}}
+                            {{instance.para1|linebreaks}}
                         </p>
                         {% endif %}
                         <p>
-                            {{instance.content}}
+                            {{instance.content|linebreaks}}
                         </p>
                     
                     </div> <!-- entry__content -->
