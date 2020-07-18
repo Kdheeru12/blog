@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Style1</title>
     {% if instance.template_name == 'style1'  %}
     <link rel="stylesheet" href=" {% static 'css/assets3/css/main.css'  %} " />
     {%else %}
@@ -186,12 +186,75 @@
 
     <!-- favicons
     ================================================== -->
+    <style>
+        @charset "UTF-8";
 
+        .logo{
+            font-size: 4rem;
+            color: ghostwhite;
+            font-weight: 300px;
+        }
+        .like-button {
+            display: inline-block;
+            position: relative;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            border: none;
+        }
+        
+        .like-button::before {
+            font-size: 2em;
+            color: #000;
+            content: '❤';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .like-button::after {
+            font-size: 2.3em;
+            color: #ff3252;
+            content: '❤';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.2s;
+        }
+        
+        .like-button.liked::after {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .like {
+            display: inline-block;
+            position: relative;
+            font-size: 20px;
+            cursor: pointer;
+            
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .like::before {
+            font-size: 2em;
+            color:red;
+            content: '❤';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+    </style>
 
 </head>
 
 <body id="top">
-
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0" nonce="GmSSn1NZ"></script>
     <!-- preloader
     ================================================== -->
     <div id="preloader">
@@ -293,6 +356,30 @@
 
                         
                     </div>
+                     
+                    <div class="s-content">
+
+                        <div class="row">
+                
+                            <div id="main" class="s-content__main large-15 column">
+                                {{total_likes }} likes
+                                                <form action="/likes" method="POST">
+                                                    {% csrf_token %}
+                                                    {% if is_liked %}
+                                                    <button type="submit" value="{{instance.slug}}" name="like" class="like"></button>
+                                                    {% else %}
+                                                    <button type="submit" value="{{instance.slug}}" name="like" class="like-button"></button>
+                                                    {% endif %}
+                                                </form>
+                                <section class="page-content">
+                            <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="10" data-width=""></div>
+                            </section>
+                            </div>
+                            </div>
+                            </div>
+                            <!-- Table -->
+
+                    
 
                 </section> <!-- end page -->
 
@@ -300,10 +387,11 @@
 
 
           <!-- end sidebar -->
-
        </div> <!-- end row -->
+      
 
    </div> <!-- end content-wrap -->
+
 
 
     <!-- Footer
@@ -376,12 +464,75 @@
 
     <!-- favicons
     ================================================== -->
-  
+    <style>
+        @charset "UTF-8";
+
+        .logo{
+            font-size: 4rem;
+            color: ghostwhite;
+            font-weight: 300px;
+        }
+        .like-button {
+            display: inline-block;
+            position: relative;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            border: none;
+        }
+        
+        .like-button::before {
+            font-size: 2em;
+            color: #000;
+            content: '❤';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .like-button::after {
+            font-size: 2.3em;
+            color: #ff3252;
+            content: '❤';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.2s;
+        }
+        
+        .like-button.liked::after {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .like {
+            display: inline-block;
+            position: relative;
+            font-size: 20px;
+            cursor: pointer;
+            
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .like::before {
+            font-size: 2em;
+            color:red;
+            content: '❤';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+    </style>
 
 </head>
 
 <body id="top">
-
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0" nonce="GmSSn1NZ"></script>
     <!-- preloader
     ================================================== -->
     <div id="preloader">
@@ -532,8 +683,28 @@
                         {% endif %}
                     </div> 
 
-                </article> <!-- end entry -->
+                </article>
+            
+                                </form> <!-- end entry -->
+                <div class="s-content">
 
+                    <div class="row">
+            
+                        <div id="main" class="s-content__main large-15 column">
+                            {{total_likes }} likes
+                            <form action="/likes" method="POST">
+                                {% csrf_token %}
+                                {% if is_liked %}
+                                <button type="submit" value="{{instance.slug}}" name="like" class="like"></button>
+                                {% else %}
+                                <button type="submit" value="{{instance.slug}}" name="like" class="like-button"></button>
+                                {% endif %}
+                            <section class="page-content">
+                        <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="10" data-width=""></div>
+                        </section>
+                        </div>
+                        </div>
+                        </div>
                 <!-- page nav -->
                 <div class="post-list-nav">
                     <a rel="prev" href="#0">Prev</a>
@@ -571,7 +742,7 @@
 
         </div> <!-- end footer__bottom -->
 
-
+        
          <!-- end ss-go-top -->
 
    </footer> <!-- end Footer-->
@@ -613,11 +784,74 @@
     <script defer src="  {% static 'css/js/modernizr.js'  %} "></script>
     <!-- favicons
     ================================================== -->
+    <style>
+        @charset "UTF-8";
 
+        .logo{
+            font-size: 4rem;
+            color: ghostwhite;
+            font-weight: 300px;
+        }
+        .like-button {
+            display: inline-block;
+            position: relative;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            border: none;
+        }
+        
+        .like-button::before {
+            font-size: 2em;
+            color: #000;
+            content: '❤';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .like-button::after {
+            font-size: 2.3em;
+            color: #ff3252;
+            content: '❤';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.2s;
+        }
+        
+        .like-button.liked::after {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .like {
+            display: inline-block;
+            position: relative;
+            font-size: 20px;
+            cursor: pointer;
+            
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .like::before {
+            font-size: 2em;
+            color:red;
+            content: '❤';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+    </style>
 </head>
 
 <body id="top" class="ss-single">
-
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0" nonce="GmSSn1NZ"></script>
     <!-- preloader
     ================================================== -->
     <div id="preloader">
@@ -695,19 +929,35 @@
                         <p>
                             {{instance.content}}
                         </p>
-                    }
+                    
                     </div> <!-- entry__content -->
+                    <div class="s-content">
 
-                  
+                        <div class="row">
+                
+                            <div id="main" class="s-content__main large-15 column">
+                                {{total_likes }} likes
+                                <form action="/likes" method="POST">
+                                    {% csrf_token %}
+                                    {% if is_liked %}
+                                    <button type="submit" value="{{instance.slug}}" name="like" class="like"></button>
+                                    {% else %}
+                                    <button type="submit" value="{{instance.slug}}" name="like" class="like-button"></button>
+                                    {% endif %}
+                                </form> 
+                                <section class="page-content">
+                            <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="10" data-width=""></div>
+                            </section>
+                            </div>
+                            </div>
+                            </div>
                     <ul class="entry__post-nav h-group">
-                        <li class="prev"><a rel="prev" href="#0"><strong class="h6">Previous Article</strong> Duis Sed Odio Sit Amet Nibh Vulputate</a></li>
-                        <li class="next"><a rel="next" href="#0"><strong class="h6">Next Article</strong> Morbi Elit Consequat Ipsum</a></li>
+                        <li class="prev"><a rel="prev" href="#0"><strong class="h6">Previous Article</strong> </a></li>
+                        <li class="next"><a rel="next" href="#0"><strong class="h6">Next Article</strong> </a></li>
                     </ul>
 
                 </article> <!-- end entry -->
-
                 
-
            
 
         </div> <!-- end footer__bottom -->
