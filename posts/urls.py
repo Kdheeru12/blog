@@ -32,5 +32,5 @@ urlpatterns = [
     path('likes',views.likes,name='likes'),
     path('logout',views.logout,name='logout'),
     path('error',views.error,name='error'),
-
-] 
+    path('test',views.test,name='test'),
+]    

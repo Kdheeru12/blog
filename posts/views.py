@@ -7,6 +7,7 @@ import random
 from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 from .models import Post
+from .models import blog
 import requests
 from django.db import models
 from django.core.paginator import Paginator
@@ -91,14 +92,15 @@ def login(request):
         user = auth.authenticate(username=email,password=password)
         if user is not None:
             auth.login(request,user)
-          
             return redirect("/")
-            
         else:
             messages.info(request,'invalid phone or password')
             return redirect('/login')
     else:
-        return render(request,'login.html')
+        if request.user.is_authenticated:
+            return redirect('/')
+        else:
+            return render(request,'login.html')
 def logout(request):
     auth.logout(request)
     return redirect('homepage')
@@ -261,3 +263,9 @@ def deletepost(request,slug=None):
         return redirect('/error')
 def error(request):
     return render(request,'error.html')
+
+def test(request):
+    form = PostForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    return render(request,'test.html',{'form':form})

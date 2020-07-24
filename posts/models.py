@@ -1,4 +1,6 @@
 from django.db import models
+from django_ckeditor_5.fields import CKEditor5Field
+from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from django.urls import reverse
 from django.db.models.signals import pre_save
@@ -8,13 +10,15 @@ from datetime import datetime
 from django.db.models.fields import (
     DateField, DateTimeField, DurationField, Field, IntegerField, TimeField,
 )
+from django.contrib.auth.models import User
 import datetime
-
-# Create your models here.
+from ckeditor.fields import RichTextField
+from tinymce.models import HTMLField
+# Create your models here. 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,default=1,on_delete=models.CASCADE)    
     title = models.CharField(max_length=400)
-    slug = models.SlugField(unique=True)  
+    slug = models.SlugField(unique=True)
     email = models.EmailField()
     image = models.ImageField(blank=True,null=True)
     heading1 = models.CharField(max_length=400,null=True)
@@ -55,3 +59,10 @@ def pre_save_post_receiver(sender,instance,*args,**kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
 pre_save.connect(pre_save_post_receiver,sender=Post)
+
+# Create your models here.
+class blog(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,default=1,on_delete=models.CASCADE)    
+    title = models.CharField(max_length=400)
+    content = CKEditor5Field()
+    
