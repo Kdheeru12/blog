@@ -65,4 +65,5 @@ class blog(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,default=1,on_delete=models.CASCADE)    
     title = models.CharField(max_length=400)
     content = CKEditor5Field()
-    
+class Video(models.Model):
+    url = models.CharField(max_length=800)
