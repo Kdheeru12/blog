@@ -19,3 +19,5 @@ sqlparse==0.3.0
 urllib3==1.25.7
 psycopg2==2.8.5
 django-phonenumber-field
+opencv-python
+MoviePy
