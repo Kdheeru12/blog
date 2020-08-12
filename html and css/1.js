@@ -1,40 +1,38 @@
 
-var check_status = false;
-var like_cnt = $("#like-cnt");
-var like_parent = $(".like-container");
+var tl = new TimelineMax(),
+split404  = new SplitText(".textB", {type:"chars"}),
+splitPage = new SplitText(".textA", {type:"chars"}),
+splitBack = new SplitText(".textC", {type:"chars"});
 
-var burst = new mojs.Burst({
-  parent: like_parent,
-  radius:   { 20: 60 },
-  count: 15,
-  angle:{0:30},
-  children: {
-    delay: 250,
-    duration: 700,
-    radius:{10: 0},
-    fill:   [ '#ddca7e' ],
-    easing: 		mojs.easing.bezier(.08,.69,.39,.97)
-  }
-});
+split404.split({type:"chars"});
+splitPage.split({type:"chars"});
+splitBack.split({type:"chars"});
 
-$("#like-cnt").click(function(){
-  var t1 = new TimelineLite();
-  var t2 = new TimelineLite();
-  if(!check_status){
-    t1.set(like_cnt, {scale:0});
-    t1.set('.like-btn', {scale: 0});
-    t1.to(like_cnt, 0.6, {scale:1, background: '#ddca7e',ease: Expo.easeOut});
-    t2.to('.like-btn', 0.65, {scale: 1, ease: Elastic.easeOut.config(1, 0.3)}, '+=0.2');
-//    t1.timeScale(5);
-    check_status=true;
-    //circleShape.replay();
-    burst.replay();
-  }
-  else{
-    t1.to(like_cnt, 1, {scale:1})
-      .to(like_cnt, 1, {scale:1, background: 'rgba(255,255,255,0.3)', ease: Power4.easeOut});
-    t1.timeScale(7);
-    check_status=false;
-  }
-  
-})
+tl.set(".hide", {opacity: 0})
+.set(".box", {scale: 0,  transformOrigin: "50% 50%"})
+.set(".hide.big-white-circle", {scale: 0,  transformOrigin: "50% 50%"})
+.set(".hide.bottom-triangles", {scale: 0, rotation: 720,  transformOrigin: "50% 50%"})
+
+.to(".box", 2, {scale: 1, transformOrigin: "50% 50%", ease: Elastic.easeOut.config(1, 0.5)})
+
+.staggerFrom(split404.chars, 1, {opacity: 0, scaleX: 0, ease: Power4.easeOut}, 0.05, "-=1")
+.staggerTo(split404.chars, 1, {opacity: 1, scaleX: 1, ease: Power4.easeOut}, 0.05, "-=1")
+
+.staggerFrom(splitPage.chars, 1, {opacity: 0, scaleX: 0, ease: Power4.easeOut}, 0.05, "-=1")
+.staggerTo(splitPage.chars, 1, {opacity: 1, scaleX: 1, ease: Power4.easeOut}, 0.05, "-=1")
+
+.staggerFrom(splitBack.chars, 1, {opacity: 0, scaleX: 0, ease: Power4.easeOut}, 0.05, "-=1.5")
+.staggerTo(splitBack.chars, 1, {opacity: 1, scaleX: 1, ease: Power4.easeOut}, 0.05, "-=1.5")
+.to(".hide.big-white-circle", 2, {scale: 1, opacity: 1, ease: Elastic.easeOut.config(1, 0.3)}, "-=1.45")
+.to(".hide.spin-circles", 2, {opacity: 1}, "-=1.45")
+.to(".hide.tri-dots", 1, {opacity: 1}, "-=1.5")
+.to(".hide.bottom-triangles", 2, {opacity: 1, scale: 1, rotation: 0}, "-=1.5")
+.to(".start-tri", 1, {morphSVG:".end-tri"}, "-=1.5")
+
+// .timeScale();
+// .seek();
+
+// create repeating timeline for spinning circles
+var tlSpin = new TimelineMax({repeat: -1});
+tlSpin.set('.hide.spin-circles', {rotation: 0, transformOrigin: "50% 50%"})
+.to('.hide.spin-circles', 3.5, {rotation: 360, ease:Linear.easeNone})

@@ -436,6 +436,12 @@ footer{
     .create{
         transform: translateY(30%);
     }
+    .activities-grid{
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(50rem,1fr));
+        grid-gap:2.5rem;
+    }
+
 }
 @media screen and (min-width:950px){
     .section::before{
@@ -452,10 +458,20 @@ footer{
     .create{
         transform: translateY(50%);
     }
+    .activities-grid{
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(50rem,1fr));
+        grid-gap:2.5rem;
+    }
 }
 @media screen and (min-width:1200px){
     .section{
         height: 75vh;
+    }
+    .activities-grid{
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(50rem,1fr));
+        grid-gap:2.5rem;
     }
 
 }

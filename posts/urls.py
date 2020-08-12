@@ -17,7 +17,7 @@ urlpatterns = [
     path('myposts',views.myposts,name='myposts'), 
     path('post-detail',views.postdetail,name='postdetail'),
     path('<slug>/post-detail',views.postdetail,name='postdetail'),
-    path('post-edit/<slug>',views.save,name='save'),
+    path('<slug>/edit',views.edit,name='edit'),
     path('<slug>/post-edit',views.editpost,name='postedit'),
     path('<user>/posts',views.othersposts,name='othersposts'),
     path('<slug>/post-delete',views.deletepost,name='deletepost'),
@@ -33,6 +33,4 @@ urlpatterns = [
     path('logout',views.logout,name='logout'),
     path('error',views.error,name='error'),
     path('test',views.test,name='test'),
-    path('video',views.video,name='video'),
-    path('myvideos',views.myvideos,name='myvideos'),
 ]    

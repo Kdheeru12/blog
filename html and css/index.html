@@ -323,9 +323,10 @@
                     {%for Post  in post %}
                     <div class="activities-grid-item star-gazing">
                         <h1>{{Post.title}}</h1>
-                        <p>
-                            {{Post.content|linebreaks|truncatechars:200}}
+                        <p style="text-align: center;">
+                            {{Post.content|safe|linebreaks|truncatechars:600}}
                         </p> 
+                        <hr>
                         <p>
                             {% if user.is_authenticated %}
                             <a href="/{{Post.slug}}/post-detail" class="btn">READ MORE</a>
@@ -333,6 +334,7 @@
                             <a href="/login" class="btn">READ MORE</a>
                             {% endif %}
                         </p>
+                        <br>
                         Author:{{Post.user.get_full_name}}
                     </div>
                     

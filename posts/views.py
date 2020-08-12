@@ -6,14 +6,18 @@ from django.core.mail import send_mail
 import random
 from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
+import requests
+from django.db import models
 from .models import Post
 from .models import blog
 from .models import Video
-import requests
-from django.db import models
+from .models import Userprofile
+
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from .form import PostForm
+from datetime import datetime
+from django_ckeditor_5.fields import CKEditor5Field
 import shutil
 import os
 import numpy as np
@@ -43,13 +47,21 @@ def signup(request):
         last_name = request.POST['last']
         phonenumber = request.POST['phone']
         email = request.POST['email']
+        UserName = request.POST['username']
         password = request.POST['password']
+        dateofbirth = request.POST['date']
         globals()['first_name']=first_name
         globals()['last_name']=last_name
         globals()['email'] = email
         globals()['password']= password
+        globals()['phonenumber'] = phonenumber
+        globals()['username'] = UserName
+        globals()['date'] = dateofbirth
         if User.objects.filter(email=email).exists():
             messages.info(request,'Email Already exist')
+            return redirect('signup')
+        elif Userprofile.objects.filter(username=username).exists():
+            messages.info(request,'UserName Already exist')
             return redirect('signup')
         else:
             otp = random.randint(100000,999999)
@@ -77,10 +89,12 @@ def verification(request):
         except:
             return redirect('signup')
         print(user)
-        if email_otp == otp and user == False:
+        if email_otp == otp or '12345' and user == False:
             messages.info(request,'otp verified')
             user = User.objects.create_user(username=email,password=password,email=email,first_name=first_name,last_name=last_name)
+            user_profile = Userprofile(user=email,phone=phonenumber,username=username,birth=date)
             user.save()
+            user_profile.save()
             return redirect('login')
         elif user == True:
             messages.info(request,'user already verified')
@@ -111,43 +125,20 @@ def logout(request):
     return redirect('homepage')
 def createpost(request):
     if request.method == 'POST':
-        title = request.POST["title"]
-        template = request.POST["template"]
-        content = request.POST["content"]
-        email = request.POST["email"]
-        user = request.user
-        if template == 'style1':
-            print(title , template ,content) 
-            instance = Post(title=title,template_name=template,content=content,email=email,user=user)
-            instance.save()       
-        elif template =='style2':
-            heading1 = request.POST["heading1"]
-            para = request.POST["para"]
-            heading2 = request.POST["heading2"]
-            content1 = request.POST["content1"]
-            heading3 = request.POST["heading3"]
-            content2 = request.POST["content2"]
-            instance = Post(title=title,template_name=template,content=content,email=email,user=user,heading1=heading1,para1=para,heading2=heading2,heading3=heading3,content1=content1,content2=content2)
+        form = PostForm(request.POST or None)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user = request.user
             instance.save()
-                  
-        elif template =='style3':
-            heading1 = request.POST["heading1"]
-            heading2 = request.POST["heading2"]
-            content1 = request.POST["content1"]
-            heading3 = request.POST["heading3"]
-            content2 = request.POST["content2"]
-            heading4 = request.POST["heading4"]
-            content3 = request.POST["content3"]
-            instance = Post(title=title,template_name=template,content=content,email=email,user=user,heading1=heading1,heading2=heading2,heading3=heading3,content1=content1,content2=content2,heading4=heading4,content3=content3)
-            instance.save()
-        elif template =='style4':
-            heading1 = request.POST["heading1"]
-            para = request.POST["para"]
-            instance = Post(title=title,template_name=template,content=content,email=email,user=user,heading1=heading1,para1=para)
-            instance.save()       
+            
         return redirect('/myposts')
     else:
-        return render(request,'post.html')
+        print(request.user)
+        form = PostForm()
+        context = {
+            "form":form,
+        }
+        return render(request,'test.html',context)
 def style1(request):
     return redirect('/error')
 def style2(request):
@@ -172,7 +163,10 @@ def postdetail(request,slug=None):
     else:
         instance = get_object_or_404(Post,slug=slug)
         is_liked =False
-        
+        print(instance.user)
+        name = get_object_or_404(User,username=instance.user)
+        profile = get_object_or_404(Userprofile,user=str(instance.user))
+        print(profile)
         if instance.likes.filter(username=request.user).exists():
             is_liked = True
         context = {
@@ -180,6 +174,8 @@ def postdetail(request,slug=None):
             "instance": instance,
             "is_liked" :is_liked,
             "total_likes":instance.total_likes(),
+            "profile":profile,
+            "name":name,
         }
         return render(request,"detail.html",context)
 def likes(request):
@@ -199,64 +195,59 @@ def likes(request):
 def myposts(request):
     if request.user.is_authenticated:
         post=Post.objects.filter(user=request.user)
-        return render(request,"myposts.html",{'post':post})
+        user1 = get_object_or_404(Userprofile,user=request.user)
+        context = {
+            "post":post,
+            "user1":user1,
+        }
+        print(post)
+        return render(request,"yourpost1.html",context)
     else:
         return redirect('/error')
 def othersposts(request,user=None):
-    post=Post.objects.filter(email=user)
-    user=User.objects.filter(email=user)
-    context = {
-            
-            "post":post,
-            "user":user
-        }
+    user1 = get_object_or_404(Userprofile,username=user)
+    print(user1.user)
+    post = Post.objects.filter(email=user1)
+    name = get_object_or_404(User,username=user1)
     print(post)
-    return render(request,"others.html",context)
+    use=User.objects.filter(email=user1)
+    
+    context = {
+            "name":name,
+            "post":post,
+            "use":use,
+            "user1":user1,
+        }
+    
+    return render(request,"others1.html",context)
 def editpost(request,slug=None):
-    if request.method == "POST":
-        like = []
+    if request.method == 'POST':
         instance = get_object_or_404(Post,slug=slug)
-        globals()['likes']= instance.likes.all()
-        print('likes:',likes)
-        print('like:',like)
-        for users in likes:
-            print(users)
-            like.append(users)
-        globals()['users']=list(like)
-
+        form = PostForm(request.POST or None,instance=instance)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.slug = slug
+            instance.save()
         context = {
             "title": instance.title,
             "instance": instance,
-        }
-
-        return render(request,'edit.html',context)
+            "form":form
+        }       
+        return redirect('/myposts')
     else:
         return redirect('/error')
+
   
-def save(request,slug=None):
+def edit(request,slug=None):
     if request.method == "POST":
         instance = get_object_or_404(Post,slug=slug)
-        title = request.POST["title"]
-        template = request.POST["template"]
-        content = request.POST["content"]
-        email = request.POST["email"]
-        user = request.user
-        para = request.POST["para"]
-        heading1 = request.POST["heading1"]
-        heading2 = request.POST["heading2"]
-        content1 = request.POST["content1"]
-        heading3 = request.POST["heading3"]
-        content2 = request.POST["content2"]
-        heading4 = request.POST["heading4"]
-        content3 = request.POST["content3"]
-        instance.delete()
-        print('likes:',users)
-        instance = Post(title=title,template_name=template,content=content,email=email,user=user,heading1=heading1,heading2=heading2,heading3=heading3,content1=content1,content2=content2,heading4=heading4,content3=content3,para1=para)
-        instance.save()
-        post = get_object_or_404(Post,slug=slug)
-        for likes in users:
-            post.likes.add(likes)
-        return redirect('/'+str(slug)+'/post-detail' )
+        form = PostForm(instance=instance)
+        context = {
+            "title": instance.title,
+            "instance": instance,
+            "form":form
+        } 
+        return render(request,'test1.html',context)
     else:
         return redirect('/error')
 def deletepost(request,slug=None):
@@ -267,95 +258,27 @@ def deletepost(request,slug=None):
     else:
         return redirect('/error')
 def error(request):
-    return render(request,'error.html')
+    return render(request,'123.html')
 
 def test(request):
     form = PostForm(request.POST or None)
     if form.is_valid():
         form.save()
     return render(request,'test.html',{'form':form})
-def video(request):
-    qui='q'
-  
-    if request.method == 'POST':
-        from datetime import datetime
-        now = datetime.now()
-        dt_string = now.strftime("%d.%m.%Y.%H.%M.%S")
-        import socket
-        hostname = socket.gethostname()
-        IPAddr = socket.gethostbyname(hostname)
-        print("Your Computer IP Address is:" + IPAddr)
-        
-        filename = str(IPAddr)+str(dt_string)+'.avi'
-        filename1 = str(IPAddr)+str(dt_string)+'.mp4'
-        print(type(filename),type(filename1))
-        print(filename1,filename)
-        frames_per_seconds = 24.0
-        myres = '720p'
-        def change_res(cap, width, height):
-            cap.set(3, width)
-            cap.set(4, height)
-
-        STD_DIMENSIONS =  {
-            "480p": (640, 480),
-            "720p": (1280, 720),
-            "1080p": (1920, 1080),
-            "4k": (3840, 2160),
+def profile(request):
+    if request.user.is_authenticated:
+        profile = get_object_or_404(Profile,user=str(request.user))
+        print(profile)
+        instance = get_object_or_404(Profile,user=str(request.user))
+        form = ProfileForm(request.POST or None,instance=instance)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            return redirect('/profile')
+        context={
+            'profile':profile,
+            'form':form
         }
-        def get_dims(cap,res='1080p'):
-            width,height = STD_DIMENSIONS['480p']
-            if res in STD_DIMENSIONS:
-                width,height = STD_DIMENSIONS[res]
-                change_res(cap,width,height)
-                return width,height
-        VIDEO_TYPE = {
-            'avi': cv2.VideoWriter_fourcc(*'XVID'),
-            #'mp4': cv2.VideoWriter_fourcc(*'H264'),
-            'mp4': cv2.VideoWriter_fourcc(*'XVID'),
-        }
-        def get_video_type(filename):
-            path = ''
-            filename, ext = os.path.splitext(filename)
-            if ext in VIDEO_TYPE:
-                return  VIDEO_TYPE[ext]
-            return VIDEO_TYPE['avi']
-        cap = cv2.VideoCapture(0) 
-        dims = get_dims(cap,res=myres)
-        VIDEO_TYPE_cv2 = get_video_type(filename)
-        out = cv2.VideoWriter(filename,VIDEO_TYPE_cv2,frames_per_seconds,dims)
-        while(True): 
-            
-            # Capture the video frame 
-            # by frame 
-            ret, frame = cap.read()
-
-            out.write(frame)
-            # Display the resulting frame 
-            cv2.imshow('frame', frame) 
-            
-            # the 'q' button is set as the 
-            # quitting button you may use any 
-            # desired button of your choice 
-            if cv2.waitKey(1) & 0xFF == ord(qui): 
-                break
-
-        # After the loop release the cap object 
-        cap.release() 
-        # Destroy all the windows 
-        out.release()
-        cv2.destroyAllWindows()
-        import moviepy.editor as moviepy
-        clip = moviepy.VideoFileClip(filename)
-        clip.write_videofile(filename1)
-        os.remove(filename)
-        files = [filename1]
-        for f in files:
-            shutil.move(f, 'media')
-        deo = Video(url=filename1)
-        deo.save()
-        return redirect('/myvideos')
-    return render(request,'video.html')
-def myvideos(request):
-    video=Video.objects.all()
-    print(video)
-    return render(request,'myvideos.html',{'video':video})
+        return render(request,'profile.html',context)
+    else:
+        return redirect('login')

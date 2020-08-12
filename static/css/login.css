@@ -13,12 +13,12 @@ section{
     background-color:#b8cdf5; 
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 30px;
 }
 section .container{
     position: relative;
     width: 1000px;
-    height: 500px;
+    height: 600px;
     background: white;
     box-shadow: 0 20px 60px cornflowerblue;
 }

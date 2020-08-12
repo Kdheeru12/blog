@@ -176,11 +176,11 @@ CKEDITOR_5_CONFIGS = {
             '|',
             'blockQuote', 'imageUpload'
         ],
-        'toolbar': ['heading', '|', 'outdent', 'indent','alignment','|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
-        'code','subscript', 'superscript', 'highlight', '|',
+        'toolbar': ['heading','|','bold', 'italic', 'link', 'underline', 'strikethrough','|',
+        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|', 'outdent', 'indent','alignment','|' 'highlight', '|',
                     'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', 'imageUpload', '|',
-                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
-                    'insertTable','SpecialCharacters','SpecialCharactersEssentials', 'SpecialCharactersEmoji'],
+                     'removeFormat',
+                    'insertTable','|','code','subscript', 'superscript','mediaEmbed','CodeSnippet','SpecialCharacters','SpecialCharactersEssentials', 'SpecialCharactersEmoji'],
         
         'image': {
             'toolbar': ['imageTextAlternative', 'imageTitle', '|', 'imageStyle:alignLeft', 'imageStyle:full',
@@ -214,7 +214,7 @@ CKEDITOR_5_CONFIGS = {
                 { 'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3' }
             ]
         },
-  
+        
         
     }
 }

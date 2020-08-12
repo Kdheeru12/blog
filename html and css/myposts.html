@@ -500,10 +500,10 @@ button:focus+.design-container {
               <span class="design design--7"></span>
               <span class="design design--8"></span>
             </div>
-            <form action="/{{Post.slug}}/post-edit" method="POST">
+            <form action="/{{Post.slug}}/edit" method="POST">
               {% csrf_token %}
               {% if user.is_authenticated %}
-              <a href="/{{Post.slug}}/post-edit"><button>edit</button></a>
+              <a href="/{{Post.slug}}/edit"><button>edit</button></a>
              {% else %}
               <a href="/error"><button>edit</button></a>
               {% endif %}
