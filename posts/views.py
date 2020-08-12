@@ -18,10 +18,7 @@ from .form import PostForm
 from .form import UserprofileForm
 from datetime import datetime
 from django_ckeditor_5.fields import CKEditor5Field
-import shutil
 import os
-import numpy as np
-import cv2
 
 def homepage(request):
     post=Post.objects.all()

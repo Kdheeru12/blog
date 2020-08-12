@@ -13,7 +13,6 @@ from django.db.models.fields import (
 from django.contrib.auth.models import User
 import datetime
 from ckeditor.fields import RichTextField
-from tinymce.models import HTMLField
 # Create your models here. 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,default=1,on_delete=models.CASCADE)    
