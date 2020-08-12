@@ -33,4 +33,6 @@ urlpatterns = [
     path('logout',views.logout,name='logout'),
     path('error',views.error,name='error'),
     path('test',views.test,name='test'),
+    path('yourprofile',views.profile,name='yourprofile'),
+
 ]    

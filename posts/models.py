@@ -63,10 +63,11 @@ class blog(models.Model):
 class Video(models.Model):
     url = models.CharField(max_length=800)
 class Userprofile(models.Model):
-    user = models.EmailField(unique=True)
-    phone = models.IntegerField()
-    username = models.CharField(max_length=40,unique=True)
-    birth = models.DateField()
+    user = models.EmailField(unique=True,blank=True,null=True)
+    phone = models.IntegerField(blank=True,null=True)
+    username = models.CharField(max_length=100,unique=True)
+    birth = models.DateField(blank=True,null=True)
+    profession = models.CharField(max_length=800,blank=True,null=True)
     about_me = models.TextField(blank=True,null=True)
     profile_img = models.ImageField(blank=True,null=True)
     def __str__(self):

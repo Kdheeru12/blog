@@ -12,10 +12,10 @@ from .models import Post
 from .models import blog
 from .models import Video
 from .models import Userprofile
-
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from .form import PostForm
+from .form import UserprofileForm
 from datetime import datetime
 from django_ckeditor_5.fields import CKEditor5Field
 import shutil
@@ -78,6 +78,8 @@ def signup(request):
             return redirect('verification')
         return render(request,'signup.html')
     else:
+        if request.user.is_authenticated:
+            return redirect('/')
         return render(request,'signup.html')
 def verification(request):
     if request.method == 'POST':
@@ -103,7 +105,10 @@ def verification(request):
             messages.info(request,'otp invalid')
             return redirect('verification')
     else:
-        return render(request,'verification.html')
+        if request.user.is_authenticated:
+            return redirect('/')
+        else:
+            return render(request,'verification.html')
 def login(request):
     if request.method == 'POST':
         password = request.POST['password']
@@ -265,20 +270,34 @@ def test(request):
     if form.is_valid():
         form.save()
     return render(request,'test.html',{'form':form})
+#def profile(request):
+#    if request.user.is_authenticated:
+#        profile = get_object_or_404(Profile,user=str(request.user))
+#        print(profile)
+#        instance = get_object_or_404(Profile,user=str(request.user))
+#        form = ProfileForm(request.POST or None,instance=instance)
+#       if form.is_valid():
+ #           instance = form.save(commit=False)
+  #          instance.save()
+   #         return redirect('/profile')
+    #    context={
+     #       'profile':profile,
+     #       'form':form
+     #   }
+     #   return render(request,'profile.html',context)
+    #else:
+    #    return redirect('login')
 def profile(request):
     if request.user.is_authenticated:
-        profile = get_object_or_404(Profile,user=str(request.user))
-        print(profile)
-        instance = get_object_or_404(Profile,user=str(request.user))
-        form = ProfileForm(request.POST or None,instance=instance)
+        instance = get_object_or_404(Userprofile,user=str(request.user))
+        form = UserprofileForm(request.POST or None,request.FILES or None,instance=instance)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.save()
-            return redirect('/profile')
+            return redirect('/myposts')
         context={
-            'profile':profile,
             'form':form
         }
-        return render(request,'profile.html',context)
+        return render(request,'profile-edit.html',context)
     else:
-        return redirect('login')
+        return redirect('/error')
