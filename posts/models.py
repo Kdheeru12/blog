@@ -71,3 +71,15 @@ class Userprofile(models.Model):
     profile_img = models.ImageField(blank=True,null=True)
     def __str__(self):
         return self.user
+class Comment(models.Model):
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now=True)
+    comm = models.TextField()
+class SubComment(models.Model):
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now=True)
+    comm = models.TextField()   
+    comment = models.ForeignKey(Comment,on_delete=models.CASCADE)
+    

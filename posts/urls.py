@@ -8,7 +8,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('',views.homepage,name='homepage'),
-    path('query',views.homepage,name='homepage'),
+    path('blogs',views.blogs,name='blogs'),
 
     path('login',views.login,name='login'),
     path('signup',views.signup,name='signup'),
@@ -33,6 +33,8 @@ urlpatterns = [
     path('logout',views.logout,name='logout'),
     path('error',views.error,name='error'),
     path('test',views.test,name='test'),
-    path('yourprofile',views.profile,name='yourprofile'),
+    path('profile',views.profile,name='profile'),
+    path('profile-edit',views.profileedit,name='yourprofile'),
+    path('contact-us',views.contact,name='contact')
 
 ]    

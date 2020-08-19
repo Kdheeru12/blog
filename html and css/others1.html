@@ -11258,6 +11258,13 @@ body:after {
 <!--about -->
 	<div class="about" id="about">
 		<div class="container">
+      {% if user1.profile_img == ''  %}
+      {% else %}
+      <div class="col-md-4 about-left">
+        <img src="/media/{{user1.profile_img}}" class="img-responsive" alt="">
+        {{user1.profile_img}}
+      </div>
+      {% endif %}
 				<div class="col-md-7 about-right">
 				<div class="about-me">
 				<h2>{{name.last_name}} {{name.first_name}}</h2>

@@ -11,7 +11,7 @@ from django.db import models
 from .models import Post
 from .models import blog
 from .models import Video
-from .models import Userprofile
+from .models import Userprofile,Comment,SubComment
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from .form import PostForm
@@ -19,6 +19,8 @@ from .form import UserprofileForm
 from datetime import datetime
 from django_ckeditor_5.fields import CKEditor5Field
 import os
+import json
+from django.http import HttpResponse
 
 def homepage(request):
     post=Post.objects.all()
@@ -36,8 +38,24 @@ def homepage(request):
     
     page_number = request.GET.get('page')
     post = paginator.get_page(page_number)
-    return render(request,'index.html',{'post':post})
+    return render(request,'index2.html',{'post':post})
+def blogs(request):
+    post=Post.objects.all()
+    post_list = Post.objects.all()
+    print(post)
+    query = request.GET.get("q")
+    print(query)
+    if query:
+        post_list = post_list.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query)
+            ).distinct()
 
+    paginator = Paginator(post_list, 10) # Show 25 contacts per page.
+    
+    page_number = request.GET.get('page')
+    post = paginator.get_page(page_number)
+    return render(request,'blog.html',{'post':post})
 def signup(request):
     if request.method == 'POST':
         first_name = request.POST['first']
@@ -127,7 +145,7 @@ def logout(request):
     return redirect('homepage')
 def createpost(request):
     if request.method == 'POST':
-        form = PostForm(request.POST or None)
+        form = PostForm(request.POST,request.FILES or None)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.user = request.user
@@ -169,22 +187,39 @@ def postdetail(request,slug=None):
         name = get_object_or_404(User,username=instance.user)
         profile = get_object_or_404(Userprofile,user=str(instance.user))
         print(profile)
+        if request.method=='POST':
+            comm = request.POST.get('comm')
+            comm_id = request.POST.get('comm_id')
+            if comm_id:
+                SubComment(
+                    post=instance,
+                    user=request.user,
+                    comm = comm,
+                    comment = Comment.objects.get(id=int(comm_id))
+                ).save()
+            else:
+                Comment(post=instance,user=request.user,comm=comm).save()
+        comments = []
+        for c in Comment.objects.filter(post=instance):
+            comments.append([c,SubComment.objects.filter(comment=c)])
+
         if instance.likes.filter(username=request.user).exists():
             is_liked = True
         context = {
             "title": instance.title,
             "instance": instance,
+            "comments":comments,
             "is_liked" :is_liked,
             "total_likes":instance.total_likes(),
             "profile":profile,
             "name":name,
         }
-        return render(request,"detail.html",context)
+        return render(request,"detail1.html",context)
 def likes(request):
     slug=request.POST.get('like')
     post = get_object_or_404(Post,slug=request.POST.get('like'))
     is_liked =False
-    print(post.likes.filter(username=request.user).exists())
+    
     if post.likes.filter(username=request.user).exists():
         
         post.likes.remove(request.user)
@@ -193,7 +228,7 @@ def likes(request):
     else:
         post.likes.add(request.user)
         is_liked = True
-    return redirect('/' + str(slug)+'/post-detail' )
+    return HttpResponse('/' + str(slug)+'/post-detail' )
 def myposts(request):
     if request.user.is_authenticated:
         post=Post.objects.filter(user=request.user)
@@ -260,7 +295,7 @@ def deletepost(request,slug=None):
     else:
         return redirect('/error')
 def error(request):
-    return render(request,'123.html')
+    return render(request,'detail1.html')
 
 def test(request):
     form = PostForm(request.POST or None)
@@ -284,7 +319,7 @@ def test(request):
      #   return render(request,'profile.html',context)
     #else:
     #    return redirect('login')
-def profile(request):
+def profileedit(request):
     if request.user.is_authenticated:
         instance = get_object_or_404(Userprofile,user=str(request.user))
         form = UserprofileForm(request.POST or None,request.FILES or None,instance=instance)
@@ -298,3 +333,33 @@ def profile(request):
         return render(request,'profile-edit.html',context)
     else:
         return redirect('/error')
+def profile(request):
+    if request.user.is_authenticated:
+        user1 = get_object_or_404(Userprofile,user=request.user)
+        context = {
+            "user1":user1,
+        }
+        return render(request,"profile.html",context)
+    else:
+        return redirect('/error')
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        message = request.POST['message']
+        send_mail('Regarding Login Into the WEBSITE',
+            'Hello '+'  '  + name+'  ' +'Your Query Has Been Recorded Our Team Will Contact You As Soon As Possible',
+            'noreply@gmail.com',
+            [email,'dheerukreddy@gmail.com'],
+        )
+        send_mail('Regarding Login Into the WEBSITE',
+            'Hello Dheeraj '+'  ' + 'There Is a Query REcorded By' + name+'    '
+            'email:'+'  '+ str(email)+'   '
+            'message:'+'  '+ str(message),
+            'noreply@gmail.com',
+            ['dheerukreddy@gmail.com'],
+            )
+        messages.info(request,'Your Query Has been Sucessfully Recoded We will contact You soon')
+        
+        return redirect('/contact-us')   
+    return render(request,'contact.html')

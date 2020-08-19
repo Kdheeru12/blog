@@ -12,17 +12,17 @@
   
   
   <title>style1</title>
-  <link rel="stylesheet" href=" {% static 'css/assets1/bootstrap/css/bootstrap.min.css'  %}   ">
-  <link rel="stylesheet" href=" {% static 'css/assets1/bootstrap/css/bootstrap-grid.min.css'  %}  ">
-  <link rel="stylesheet" href=" {% static 'css/assets1/bootstrap/css/bootstrap-reboot.min.css'  %}  ">
+
+  <style>
+      figure{
+          width: 510px;
+      }
+  </style>
   <link rel="stylesheet" href=" {% static 'css/assets1/tether/tether.min.css'  %} ">
   <link rel="stylesheet" href=" {% static 'css/assets1/theme/css/style.css'  %}   ">
   <link rel="preload" as="style" href=" {% static 'css/assets1/mobirise/css/mbr-additional.css'  %} ">
   <link rel="stylesheet" href="   {% static 'css/assets1/mobirise/css/mbr-additional.css'  %}  " type="text/css">
-  <style>
-   
-    img {  max-width: 100%;   height: auto;   width: 100%; }
-</style>
+
 <style>
     @charset "UTF-8";
     .logo{
@@ -99,32 +99,135 @@
                 <a href="/{{profile.username}}/posts"><h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">{{instance.user.get_full_name}} &nbsp;{{profile.username}}&nbsp;<br></h3></a>
             </div>
         </div>
+    
+    <div class="ck ck-editor__main" role="presentation">
+        <div class="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred" lang="en" dir="ltr" role="textbox" aria-label="Rich Text Editor, main">
+            {{instance.content|safe}}
     </div>
-    <div class="container">
-        {{instance.content|safe}}
+    </div>
         <hr>
-        {{total_likes }} likes
-        <form action="/likes" method="POST">
-            {% csrf_token %}
-            {% if is_liked %}
-            <button type="submit" value="{{instance.slug}}" name="like" class="like"></button>
-            {% else %}
-            <button type="submit" value="{{instance.slug}}" name="like" class="like-button"></button>
+        <div id="mess" >
+            {{total_likes }} likes
+            <br>
+            {% if request.user.is_authenticated %}
+            <form  id="likes">
+                {% csrf_token %}
+                {% if is_liked %}
+                <button type="submit" value="{{instance.slug}}" name="like" id="like" class="like"></button>
+                {% else %}
+                <button type="submit" value="{{instance.slug}}" name="like" id="like" class="like-button"></button>
+                {% endif %}
+               
+            </form>
             {% endif %}
-           
-        </form>
+        </div >
+       
         <br>
 
         <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="10" data-width=""></div>
     </div>
     </div>
 </section>
+
+
 <script src="{% static 'asset/web/assets/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'asset/popper/popper.min.js' %}"></script>
 <script src="{% static 'asset/bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'asset/tether/tether.min.js' %}"></script>
 <script src="{% static 'asset/smoothscroll/smooth-scroll.js'  %}"></script>
 <script src="{% static 'asset/theme/js/script.js'  %}"></script>
+<script type="text/javascript">
+    $(document).on('submit','#likes',function(e)
+    {
+        e.preventDefault();
+        $.ajax(
+            {
+                type:'POST',
+                url:'/likes',
+                data:{
+                    like:$('#like').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success:function(data){
+                     document.getElementById('mess').innerHTML = data;
+                }
+            }
+        );
+    });
 
+</script>
+
+</body>
+</html>
+<div class="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred" lang="en" dir="ltr" role="textbox" aria-label="Rich Text Editor, main" contenteditable="true">
+    <p><br data-cke-filler="true">
+    </p>
+</div>
+
+{% load static  %}
+<!DOCTYPE html>
+<html  >
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href=" {% static 'css/'  %}  assets1/images/logo4.png" type="image/x-icon">
+  <meta name="description" content="">
+  
+  
+  <title>style1</title>
+  <link rel="stylesheet" href=" {% static 'css/assets1/bootstrap/css/bootstrap.min.css'  %}   ">
+  <link rel="stylesheet" href=" {% static 'css/assets1/bootstrap/css/bootstrap-grid.min.css'  %}  ">
+  <link rel="stylesheet" href=" {% static 'css/assets1/bootstrap/css/bootstrap-reboot.min.css'  %}  ">
+  <link rel="stylesheet" href=" {% static 'css/assets1/tether/tether.min.css'  %} ">
+  <link rel="stylesheet" href=" {% static 'css/assets1/theme/css/style.css'  %}   ">
+  <link rel="preload" as="style" href=" {% static 'css/assets1/mobirise/css/mbr-additional.css'  %} ">
+  <link rel="stylesheet" href="   {% static 'css/assets1/mobirise/css/mbr-additional.css'  %}  " type="text/css">
+  
+  
+  
+</head>
+
+<body>
+  <section class="mbr-section form1 cid-s48bJZGPY0" id="form1-n">
+
+    
+
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="title col-12 col-lg-8">
+                <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">CREATE YOUR BLOG</h2>
+                <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">Easily Create &nbsp;Just Your Post Just Fill the Form&nbsp;<br></h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="media-container-column col-lg-12" data-form-type="formoid">
+                <!---Formbuilder Form--->
+                <form class="mbr-form form-with-styler" enctype="multipart/form-data">
+                    <div class="ck ck-editor__main" role="presentation">
+                        <div class="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred" lang="en" dir="ltr" role="textbox" aria-label="Rich Text Editor, main">
+                            {{instance.content|safe}}
+                    </div>
+                    </div>
+                    <div class="col-md-12 input-group-btn align-center"><button type="submit" class="btn btn-primary btn-form display-4">Publish Blog</button></div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  <script src="  {% static 'css/assets1/popper/popper.min.js'  %} "></script>
+  <script src="  {% static 'css/assets1/bootstrap/js/bootstrap.min.js'  %} "></script>
+  <script src="  {% static 'css/assets1/tether/tether.min.js'  %} "></script>
+  <script src="  {% static 'css/assets1/smoothscroll/smooth-scroll.js'  %} "></script>
+  <script src="  {% static 'css/assets1/theme/js/script.js'  %} "></script>
+  
+  
 </body>
 </html>

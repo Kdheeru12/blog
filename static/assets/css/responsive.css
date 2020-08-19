@@ -1,0 +1,208 @@
+/* ----------------------------------------------------------------------------------------
+* Author        : Coderspoint
+* Template Name : Pushpo - One Page App Landing Page
+* File          : Pushpo Responsive CSS file
+* Version       : 1.0
+* ---------------------------------------------------------------------------------------- */
+
+
+/* --------------------------------------------------------------------------------
+*                                   Responsive CSS
+* ------------------------------------------------------------------------------- */
+
+
+/* Medium Layout */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  
+}
+/* Medium Layout */
+
+
+
+
+
+/* Tablet Layout */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+    /* Mobile Menu Css Starts */
+    navbar-nav li a {
+        padding: 15px 5px;
+    }
+    /* Mobile Menu Css Ends */
+
+    /* Blog page css */
+    .grid-content img {
+        width: 100%;
+    }
+    .grid-content {
+        margin-bottom: 30px;
+    }
+    .blog-item {
+        margin-top: 0;
+    }
+    .blog-pagination {
+        padding-top: 20px;
+    }
+    .blog-pagination .lnr-arrow-left,
+    .blog-pagination .lnr-arrow-right {
+        top: 25%;
+    }
+    
+    .widget-box img {
+        width: 100%;
+    }
+    .widget-img-box img {
+        width: 100%;
+    }
+    #contactgoogleMap {
+        float: none;
+        width: 100%;
+    }
+    .contact-form {
+        padding-left: 15px;
+    }
+    #submitButton {
+        margin-bottom: 30px;
+    }
+    .error-img img{
+        width: 100%;
+    }
+
+    .error-text {
+        padding-top: 100px;
+        padding-bottom: 50px;
+    }
+
+    .single-post img,
+    .single-post-grid img {
+        width: 100%;
+    }
+}
+/* Tablet Layout */
+
+
+
+
+/* Mobile Layout */
+
+@media only screen and (max-width: 767px) {
+    
+    /* Mobile Menu Css Starts */
+    .navbar-toggle {
+        margin-right: 0px;
+    }
+    .navbar-fixed-bottom .navbar-collapse,
+    .navbar-fixed-top .navbar-collapse {
+        background: #fff;
+        margin-top: 15px;
+        box-shadow: 0px 20px 50px 0px rgba(153, 153, 153, 0.1); 
+    }
+    .navbar {
+        min-height: 0px;
+    }
+    .mainmenu .navbar-nav {
+        margin: 0;
+    }
+    .mainmenu .navbar-nav li {
+        float: none;
+        display: block;
+    }
+    .mainmenu .navbar-nav li a {
+        padding: 11px 15px;
+        color: inherit;
+    }
+    .navbar-fixed-bottom .navbar-collapse,
+    .navbar-fixed-top .navbar-collapse {
+        max-height: 420px;
+        margin-top: 10px;
+    }
+    /* Mobile Menu Css Ends */
+
+
+
+    /* Slider Css Starts */
+    .intro-text {
+        padding: 0 15px;
+    }
+    .intro-text h1 {
+        font-size: 40px;
+        line-height: 50px;
+        margin-bottom: 10px;
+    }
+    /* Slider Css Ends */
+
+    /* Blog page css */
+    .grid-content img {
+        width: 100%;
+    }
+    .grid-content {
+        margin-bottom: 30px;
+    }
+    .blog-item {
+        margin-top: 0;
+    }
+    .blog-pagination {
+        padding-top: 20px;
+    }
+    .blog-pagination .lnr-arrow-left,
+    .blog-pagination .lnr-arrow-right {
+        top: 25%;
+    }
+
+    .widget-box img {
+        width: 100%;
+    }
+    .widget-img-box img {
+        width: 100%;
+    }
+    
+    #contactgoogleMap {
+        float: none;
+        width: 100%;
+    }
+    .contact-form {
+        padding-left: 0;
+    }
+    #submitButton {
+        margin-bottom: 30px;
+    }
+    .error-img img{
+        width: 100%;
+    }
+    .error-text {
+        padding-top: 100px;
+        padding-bottom: 50px;
+    }
+
+    .single-post img,
+    .single-post-grid img {
+        width: 100%;
+    }
+    
+}
+
+
+/* Small Mobile Layout */
+@media only screen and (max-width: 480px) {
+    .blog-item img {
+        float: none;
+        width: 100%;
+    }
+    .blog-item h3,.blog-item p{
+        padding-left: 30px;
+    }
+    .blog-item .lnr-user {
+        padding-left: 30px;
+    }
+    .blog-pagination .lnr-arrow-left {
+        left: 24%;
+    }
+    .blog-pagination .lnr-arrow-right {
+        right: 25%;
+    }
+    
+    .depth:after {
+        width: 75%;
+    }
+}
+/* Small Mobile Layout 

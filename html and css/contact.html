@@ -1,0 +1,94 @@
+{% load static  %}
+<!DOCTYPE html>
+<html  >
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href=" {% static 'css/'  %}  assets1/images/logo4.png" type="image/x-icon">
+  <meta name="description" content="">
+  
+  
+  <title>style1</title>
+  <link rel="stylesheet" href=" {% static 'css/assets1/bootstrap/css/bootstrap.min.css'  %}   ">
+  <link rel="stylesheet" href=" {% static 'css/assets1/bootstrap/css/bootstrap-grid.min.css'  %}  ">
+  <link rel="stylesheet" href=" {% static 'css/assets1/bootstrap/css/bootstrap-reboot.min.css'  %}  ">
+  <link rel="stylesheet" href=" {% static 'css/assets1/tether/tether.min.css'  %} ">
+  <link rel="stylesheet" href=" {% static 'css/assets1/theme/css/style.css'  %}   ">
+  <link rel="preload" as="style" href=" {% static 'css/assets1/mobirise/css/mbr-additional.css'  %} ">
+  <link rel="stylesheet" href="   {% static 'css/assets1/mobirise/css/mbr-additional.css'  %}  " type="text/css">
+
+</head>
+<style>
+    body{
+        background-color:#ffffff;
+    }
+    section{
+        background-color: #ffffff;
+
+    }
+    .top{
+        padding-top: 130px;
+    }
+    .message{
+        color: red;
+    }
+</style>
+<body>
+  <div class="top" >
+    <section class="mbr-section form1 cid-s7IiN9ptbn" id="form1-k">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="title col-12 col-lg-8">
+                    {% for message in messages%}
+                    <span class="message">{{message}}</span>
+                     {% endfor %}
+                    <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
+                        CONTACT FORM
+                    </h2>
+                    <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">REGARDING ANY ISSUES CONTACT US USING THIS FORM</h3>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="media-container-column col-lg-8" data-form-type="formoid">
+                    <!---Formbuilder Form--->
+                    <form action="/contact-us" method="POST" class="mbr-form form-with-styler">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
+                            <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+                            </div>
+                        </div>
+                        <div class="dragArea row">
+                            <div class="col-md-4  form-group" data-for="name">
+                                <label for="name-form1-k" class="form-control-label mbr-fonts-style display-7">Name</label>
+                                <input type="text" name="name" data-form-field="Name" required="required" class="form-control display-7" id="name-form1-k">
+                            </div>
+                            <div class="col-md-4  form-group" data-for="email">
+                                <label for="email-form1-k" class="form-control-label mbr-fonts-style display-7">Email</label>
+                                <input type="email" name="email" data-form-field="Email" required="required" class="form-control display-7" id="email-form1-k">
+                            </div>
+                            
+                            <div data-for="message" class="col-md-12 form-group">
+                                <label for="message-form1-k" class="form-control-label mbr-fonts-style display-7">Message</label>
+                                <textarea name="message" data-form-field="Message" class="form-control display-7" id="message-form1-k"></textarea>
+                            </div>
+                            <div class="col-md-12 input-group-btn align-center"><button type="submit" class="btn btn-primary btn-form display-4">SEND FORM</button></div>
+                        </div>
+                    </form><!---Formbuilder Form--->
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="{% static 'asset/web/assets/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'asset/popper/popper.min.js' %}"></script>
+<script src="{% static 'asset/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'asset/tether/tether.min.js' %}"></script>
+<script src="{% static 'asset/smoothscroll/smooth-scroll.js'  %}"></script>
+<script src="{% static 'asset/theme/js/script.js'  %}"></script>
+</body>
+</html>

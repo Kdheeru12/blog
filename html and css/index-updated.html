@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Aldrich&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ff7ade0387.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        /**
+ * Document defaults (don't copy these).
+ */
+
+.preload {
+    text-align: center;
+    background-color: #eee;
+  }
+
+  * {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+
+
+  /* The loader container */
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 200px;
+    height: 200px;
+
+    margin-top: -100px;
+    margin-left: -100px;
+  }
+
+
+  /* The dot */
+  .loader > .dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+
+    width: 160px;
+    height: 100px;
+
+    margin-top: -50px;
+    margin-left: -80px;
+
+    border-radius: 5px;
+
+    background: linear-gradient(135deg,rgb(400, 72, 50,.9) 10%,rgb(241, 171, 40)
+    100%);
+
+    transform-type: preserve-3d;
+
+    animation: dot1 3s cubic-bezier(.55,.3,.24,.99) infinite;
+  }
+
+  .loader > .dot:nth-child(2) {
+    z-index: 11;
+
+    width: 150px;
+    height: 90px;
+
+    margin-top: -45px;
+    margin-left: -75px;
+
+    border-radius: 3px;
+
+    background: linear-gradient(135deg,rgb(400, 72, 50,.9) 10%,rgb(241, 171, 40)
+    100%);
+
+    animation-name: dot2;
+  }
+
+  .loader > .dot:nth-child(3) {
+    z-index: 12;
+
+    width: 40px;
+    height: 20px;
+
+    margin-top: 50px;
+    margin-left: -20px;
+
+    border-radius: 0 0 5px 5px;
+
+    background: #eee5d3;
+
+    animation-name: dot3;
+  }
+
+  @keyframes dot1 {
+    3%, 97% {
+      width: 160px;
+      height: 100px;
+
+      margin-top: -50px;
+      margin-left: -80px;
+    }
+    30%, 36% {
+      width: 80px;
+      height: 120px;
+
+      margin-top: -60px;
+      margin-left: -40px;
+    }
+    63%, 69% {
+      width: 40px;
+      height: 80px;
+
+      margin-top: -40px;
+      margin-left: -20px;
+    }
+  }
+
+  @keyframes dot2 {
+    3%, 97% {
+      width: 150px;
+      height: 90px;
+
+      margin-top: -45px;
+      margin-left: -75px;
+    }
+    30%, 36% {
+      width: 70px;
+      height: 96px;
+
+      margin-top: -48px;
+      margin-left: -35px;
+    }
+    63%, 69% {
+      width: 32px;
+      height: 60px;
+
+      margin-top: -30px;
+      margin-left: -16px;
+    }
+  }
+
+  @keyframes dot3 {
+    3%, 97% {
+      width: 40px;
+      height: 20px;
+
+      margin-top: 50px;
+      margin-left: -20px;
+    }
+    30%, 36% {
+      width: 8px;
+      height: 8px;
+
+      margin-top: 49px;
+      margin-left: -5px;
+
+      border-radius: 8px;
+    }
+    63%, 69% {
+      width: 16px;
+      height: 4px;
+
+      margin-top: -37px;
+      margin-left: -8px;
+
+      border-radius: 10px;
+    }
+  }
+    </style>
+</head>
+
+</html>
+
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>shop</title>
+    <!--Ion Icons-->
+
+    <!--Our own stylesheet-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+
+
+</head>
+<body>
+    <div id="pre" >
+    <header>
+        <div class="container">
+            <nav>
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <img src="./image" alt="">
+                    </a>
+                    <h1>
+                       notyet
+                    </h1>
+                </div>
+                <div class="menu-icons open">
+                    <i class="icon ion-md-menu"></i>
+                </div>
+
+                {% if user.is_authenticated %}
+                <ul class="nav-list">
+                    <div class="menu-icons close">
+                        <i class="icon ion-md-close"></i>
+                    </div>
+                    <li class="nav-item">
+                         <a href="/myposts" class="nav-link">MY BLOGS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/profile" class="nav-link current">PROFILE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">LOGOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="nav-list">
+                    <div class="menu-icons close">
+                        <i class="icon ion-md-close"></i>
+                    </div>
+                    <li class="nav-item">
+                        <a href="" class="nav-link current">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+    <main>
+        {% if user.is_authenticated %}
+         <section class="section">
+            <div class="container">
+                <div class="main-message">
+                    <h3>HELLO</h3>
+                    <h1> {{user.first_name}} </h1>
+                    <p>
+                        Be a Writer Create Your Own Posts or Be a Reader Read and Enjoy
+                    </p>
+                    <div class="cta">
+                        <a href="createpost" class="btn">CREATE POST</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% else %}
+        <section class="section">
+            <div class="container">
+                <div class="main-message">
+                    <h3>Some Thing To</h3>
+                    <h1>Read/Write</h1>
+                    <p>
+                        “Readers are not sheep, and not every pen tempts them.”
+                    </p>
+                    <div class="cta">
+                        <a href="signup" class="btn">Signup</a> <span>&#47;</span>
+
+                        <a href="login" class="btn">LOGIN</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        {% endif %}
+
+        <section class="experience-outdoors">
+            <div class="container">
+                <div class="title-heading">
+                    <div class="body">
+                        <input id='search-btn' type='checkbox'/>
+                    <label for='search-btn'>Show search bar</label>
+                    <form action="query">
+                        <input id='search-bar' type='text' placeholder='Search...' autocomplete="off" name="q" value="{{request.GET.q}}" />
+                    </form>
+
+                    </div>
+                </div>
+                {% if request.GET.q == '' %}
+
+                {% elif request.GET.q == None %}
+
+                {% else  %}
+                <p>
+                    Posts Matching "{{request.GET.q}}""
+                </p>
+                {% endif  %}
+                <div class="activities-grid">
+                    {%for Post  in post %}
+                    <div class="activities-grid-item star-gazing">
+                        <h1>{{Post.title}}</h1>
+                        <p style="text-align: center;">
+                            {{Post.content|safe|linebreaks|truncatechars:270}}
+                        </p>
+                        <hr>
+                        <p>
+                            {% if user.is_authenticated %}
+                            <a href="/{{Post.slug}}/post-detail" class="btn">READ MORE</a>
+                            {% else %}
+                            <a href="/{{Post.slug}}/post-detail" class="btn">READ MORE</a>
+                            {% endif %}
+                        </p>
+                        <br>
+                        Author:{{Post.user.get_full_name}}
+                    </div>
+
+                    {% endfor %}
+                    <div class="pagination">
+                        <p class="step-links">
+                            {% if post.has_previous %}
+                            <a href="?page=1&q={{request.GET.q}}" class="btn"> &laquo; first  </a>
+                                <a href="?page={{ post.previous_page_number}}&q={{request.GET.q}}" class="btn">previous  </a>
+                            {% endif %}
+
+                            <p class="current">
+                                Page {{ post.number }} of {{ post.paginator.num_pages }}.
+                            </p>
+
+                            {% if post.has_next %}
+                                <a href="?page={{ post.next_page_number }}&q={{request.GET.q}}" class="btn">next</a>
+                                <a href="?page={{ post.paginator.num_pages }}&q={{request.GET.q}}" class="btn" >last &raquo;</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="created">
+            <div class="container">
+                <div class="create">
+                    <div class="created-message">
+                        <p>
+                            give It a try open chrome ang g to the website
+                        </p>
+                        <i class="icon ion-md-quote"></i>
+                    </div>
+                    <div class="created-message">
+                        <p>
+                            give It a try open chrome ang g to the website
+                        </p>
+                        <i class="icon ion-md-quote"></i>
+                    </div>
+                    <div class="image">
+                        <img src="{% static 'css/images/Doraemon.png' %}" alt="">
+                        <h1>K.Dheeraj Reddy</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="start">
+            <div class="container">
+                <div class="title-heading">
+                    <h3>Just SignUp</h3>
+                    <h1>To Begin With</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident enim deleniti veritatis fugiat perspiciatis harum facilis cum minus inventore
+                    </p>
+                </div>
+                <div class="start-grid">
+                    <div class="start-grid-item">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quidem tempore velit maxime nulla magnam temporibus illo exercitationem. Itaque maxime
+                        </p>
+                    </div>
+                    <div class="start-grid-item">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quidem tempore velit maxime nulla magnam temporibus illo exercitationem. Itaque maxime
+                        </p>
+                    </div>
+                </div>
+                <a href="#" class="btn">Login To Enjoy Services</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2019 Website. All rights reserved</p>
+    <script type="text/javascript" src="{% static 'css/scripts.js' %}"></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0" nonce="0sCNw50t"></script>
+    </footer>
+</div>
+<script>
+    $(document).ready(function() {
+
+        setTimeout(function(){
+            $('body').addClass('preload');
+            $('h1').css('color','#222222');
+        }, 3000);
+
+    });
+</script>
+</body>
+</html>
+
+

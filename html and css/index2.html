@@ -1,0 +1,831 @@
+{%  load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"       content="width=device-width, initial-scale=1.0">
+    <meta name="description"    content="Pushpo - Creative App Landing Page">
+    <meta name="keywords"       content="Apps, Software, technology, landing page, business, responsive, onepage, corporate, clean">
+    <meta name="author"         content="Coderspoint">
+
+    <!-- Site title -->
+    <title>Pushpo - Creative App Landing Page</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href=" {% static 'assets/img/favicon.jpeg' %} ">
+
+
+    <!-- Plugin Css -->
+    <link href="{% static 'assets/css/plugin.css' %}" rel="stylesheet">
+
+    <!-- Site css -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <!-- Site css -->
+    <link href="{% static 'assets/css/responsive.css' %}" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Preloader starts-->
+    <div id="preloader"></div>
+    <!-- Preloader ends -->
+
+
+
+
+
+    <!-- Navigation area starts -->
+    <div class="menu-area navbar-fixed-top">
+        <div class="container">
+            <div class="row">
+ 
+                <!-- Navigation starts -->
+                <div class="col-md-12">
+                    <div class="mainmenu">
+                        <div class="navbar navbar-nobg">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="index.html">
+                                    <img src="{% static 'assets/img/favicon2.png' %}" alt="">
+                                </a>
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            {% if request.user.is_authenticated %}
+                            <div class="navbar-collapse collapse">
+                                <nav>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a href="/myposts">MY BLOGS</a></li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROFILE<b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/profile">MY PROFILE</a></li>
+                                                <li><a href="/logout">LOGOUT</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/contact-us" class="nav-link" target="_blank">CONTACT</a></li>
+                                        
+                                    </ul>
+                                </nav>
+                            </div>
+                            {%  else %}
+                             <div class="navbar-collapse collapse">
+                                <nav>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a  href="/login">EXPLORE BLOGS</a></li>
+                                        <li><a  href="/login">LOGIN</a></li>
+                                        <li><a class="smooth_scroll" href="#feature">FEATURES</a></li>
+                                        <li><a class="smooth_scroll" href="#screenshot">SCREENSHOTS</a></li>
+                                        <li><a class="smooth_scroll" href="#price">PRICE</a></li>
+                                        <li><a href="/contact-us" class="nav-link" target="_blank">CONTACT</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation ends -->
+
+            </div>
+        </div>
+    </div>
+    <!-- Navigation area ends -->
+
+
+
+    <!-- Slider area starts -->
+    <section id="slider" class="slider-area">
+            <div class="container">
+                <div class="row d-flex">
+                    {% if request.user.is_authenticated %}
+                    <!-- slider text -->
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="slider-text clearfix">
+                            <h1>HELLO<br>{{user.first_name}}</h1>
+                            <p>Expresio stories are the easiest way to express your ideas Start Typing Be a Reader Happy Reading </p>
+                    {% else %}
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="slider-text clearfix">
+                            <h1>One Simple App <br> You Can Find Anything</h1>
+                            <p>Serenity has taken posse ssion of mine entire soul posse ssion of my entire soul which I enjoy with my whole heart. Serenity has taken posse ssion of mine has taken possession of mine entire soul possession entire soul heart.</p>
+                    {% endif %}
+                            <div class="btn-set">
+                                {% if user.is_authenticated %}
+                                <a href="" class="btn btn-black">
+                                    <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+                                    <div class="btn-text">
+                                        <h3>Create Post</h3>
+                                        <p></p>
+                                    </div>
+                                </a>
+                                <a href="" class="btn btn-white">
+                                    <i class="fa fa-heart"></i>
+                                    <div class="btn-text">
+                                        <h3>Explore Blogs</h3>
+                                        <p></p>
+                                    </div>
+                                </a>
+                                {% else %}
+                                <a href="" class="btn btn-black">
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    <div class="btn-text">
+                                        <h3>SignUp/Login</h3>
+                                        <p></p>
+                                    </div>
+                                </a>
+                                <a href="" class="btn btn-white">
+                                    <i class="fa fa-heart"></i>
+                                    <div class="btn-text">
+                                        <h3>Explore Blogs</h3>
+                                        <p></p>
+                                    </div>
+                                </a>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- slider image -->
+                    <div class="col-md-6 col-sm-12 col-xs-12 slider-img">
+                        <img src=" {% static 'assets/img/slider/3.png' %} " alt="">
+                    </div>
+
+                
+                </div>
+            </div>
+    </section>
+    <!-- Slider area ends -->
+
+
+
+    <!-- Hero boxes starts -->
+    <section class="hero-box-area section-big">
+        <div class="container">
+
+            <div class="row">
+
+                <!-- Hero box -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="hero-box">
+                        <span class="lnr lnr-lock"></span>
+                        <h3>Instant Setup</h3>
+                        <p>Lorem ipsum dolor sit amet, consect eturys adipisicing elit, sed do eiusmod tempor et dolore magna aliqua. nisiut aliquip nisiut aliquip exea comodo aliquip.</p>
+                    </div>
+                </div>
+
+                <!-- Hero box -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="hero-box">
+                        <span class="lnr lnr-flag"></span>
+                        <h3>Fast Loading</h3>
+                        <p>Lorem ipsum dolor sit amet, consect eturys adipisicing elit, sed do eiusmod tempor et dolore magna aliqua. nisiut aliquip nisiut aliquip exea comodo aliquip.</p>
+                    </div>
+                </div>
+
+                <!-- Hero box -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="hero-box">
+                        <span class="lnr lnr-screen"></span>
+                        <h3>Great Support</h3>
+                        <p>Lorem ipsum dolor sit amet, consect eturys adipisicing elit, sed do eiusmod tempor et dolore magna aliqua. nisiut aliquip nisiut aliquip exea comodo aliquip.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Hero boxes ends -->
+
+
+
+    <!-- Feature area starts -->
+    <section id="feature" class="feature-area grey section-big">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="feture-img">    
+                        <img src=" {% static '' %} assets/img/feature/ft-1.png" alt="">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="feature-content-one">
+                        <h2>Special Features <br> Core App Features</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+    </section>
+    <!-- Feature area ends -->
+
+
+
+    <!-- Feature area starts -->
+    <section class="feature-area section-big">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="feature-content-two">
+                        <h2>Special Features <br> Core App Features</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="feture-img">    
+                        <img src=" {% static '' %} assets/img/feature/ft-2.png" alt="">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- Feature area ends -->
+
+
+
+    <!-- video area starts -->
+    <div id="video" class="video-area section-big">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="video-content">
+                        <a class="popup-youtube" href="http://www.youtube.com/watch?v=xtZE3sMv6lg">
+                            <span class="lnr lnr-camera-video video-area"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="video-text">
+                        <h2>Special Features <br> Core App Features</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        
+    </div>
+    <!-- video area ends -->
+
+
+
+    <!-- screenshot area starts -->
+    <section id="screenshot" class="screenshot-area section-big">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="section-title">
+                        <h2>Unique Screens Make Us Stand Out</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+
+                
+
+                <!-- screenshots starts -->
+                <div class="screenshots">
+                    <div class="screen">
+                        <a href="assets/img/screenshots/1.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/1.png" alt=""></a>
+                    </div>
+                    <div class="screen">
+                        <a href="assets/img/screenshots/2.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/2.png" alt=""></a>
+                    </div>
+                    <div class="screen">
+                        <a href="assets/img/screenshots/3.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/3.png" alt=""></a>
+                    </div>
+                    <div class="screen">
+                        <a href="assets/img/screenshots/4.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/4.png" alt=""></a>
+                    </div>
+                    <div class="screen">
+                        <a href="assets/img/screenshots/5.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/5.png" alt=""></a>
+                    </div>
+                    <div class="screen">
+                        <a href="assets/img/screenshots/6.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/6.png" alt=""></a>
+                    </div>
+                    <div class="screen">
+                        <a href="assets/img/screenshots/7.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/7.png" alt=""></a>
+                    </div>
+                    <div class="screen">
+                        <a href="assets/img/screenshots/8.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/8.png" alt=""></a>
+                    </div>
+                    <div class="screen">
+                        <a href="assets/img/screenshots/9.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/9.png" alt=""></a>
+                    </div>
+                    <div class="screen">
+                        <a href="assets/img/screenshots/10.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/10.png" alt=""></a>
+                    </div>
+                    <div class="screen">
+                        <a href="assets/img/screenshots/11.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/11.png" alt=""></a>
+                    </div>
+                </div>
+                <!-- screenshots ends -->
+                
+            </div>
+        </div>
+    </section>
+    <!-- screenshot area ends -->
+
+    <!-- Testimonial area starts -->
+    <section id="testimonial" class="testimonial-area grey section-big">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-5 col-sm-12">
+                    <div class="testimonial-text">
+                        <h2>Client Feedback</h2>                        
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.</p>
+                    </div>
+                </div>
+           
+
+                <div class="col-md-7 col-sm-12">
+                    <div class="testimonial-list">
+
+                        <!-- Testimonial item -->
+                        <div class="single-testimonial">
+                            <h4>Emiley Blunt</h4>
+                            <div class="clearfix ratings">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>                            
+                            <img src="{% static '' %}assets/img/blog/comment1.jpg" alt="">
+                            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing aliqua ut enim minim veniam. tempor incididunt ut labore et dolore magna  aliqua ut elit sed do eiusmod tempor enim ad minim veniam"</p>
+                                                      
+                        </div>
+
+                        <!-- Testimonial item -->
+                        <div class="single-testimonial">
+                            <h4>Emiley Blunt</h4>
+                            <div class="clearfix ratings">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>                            
+                            <img src="{% static '' %}assets/img/blog/comment1.jpg" alt="">
+                           <p>"Lorem ipsum dolor sit amet, consectetur adipisicing aliqua ut enim minim veniam. tempor incididunt ut labore et dolore magna  aliqua ut elit sed do eiusmod tempor enim ad minim veniam"</p>
+                                                      
+                        </div>
+
+                        <!-- Testimonial item -->
+                        <div class="single-testimonial">
+                            <h4>Emiley Blunt</h4>
+                            <div class="clearfix ratings">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>                            
+                            <img src="{% static '' %}assets/img/blog/comment1.jpg" alt="">
+                            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing aliqua ut enim minim veniam. tempor incididunt ut labore et dolore magna  aliqua ut elit sed do eiusmod tempor enim ad minim veniam"</p>
+                                                      
+                        </div>
+
+                        <!-- Testimonial item -->
+                        <div class="single-testimonial">
+                            <h4>Emiley Blunt</h4>
+                            <div class="clearfix ratings">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>                            
+                            <img src="{% static '' %}assets/img/blog/comment1.jpg" alt="">
+                            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing aliqua ut enim minim veniam. tempor incididunt ut labore et dolore magna  aliqua ut elit sed do eiusmod tempor enim ad minim veniam"</p>
+                                                      
+                        </div>
+
+                    </div>
+
+                </div>
+           
+            </div>
+        </div>
+    </section>
+    <!-- Testimonial area ends -->
+
+
+    <!-- Price area starts -->
+    <section id="price" class="pricing-area section-big">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-12 text-center">
+                    <div class="section-title">
+                        <h2>Choose Your Pricing Plan</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                
+
+                <!-- Pricing Table -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="price-item" data-connectors="1">
+                        <div class="info">
+                            <h3>Personal</h3>
+                            <p class="price">$19.00</p>
+                        </div>
+                        <div class="features">
+                            <p>For Individual Uses</p>
+                            <ul>
+                                <li>15 Users</li>
+                                <li>10 Projects</li>
+                                <li>30 GB of Storage</li>
+                                <li>6 Workspeace</li>
+                                <li>Enhanced Security</li>
+                            </ul>
+                        </div>
+                        <a class="btn" href="#">Start Trial</a>
+                    </div>
+                </div>
+
+                <!-- Pricing Table -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="price-item featured" data-connectors="1">
+                        <div class="info">
+                            <h3>Professional</h3>
+                            <p class="price">$49.00</p>
+                        </div>
+                          <div class="features">
+                            <p>For Individual Uses</p>
+                            <ul>
+                                <li>15 Users</li>
+                                <li>10 Projects</li>
+                                <li>30 GB of Storage</li>
+                                <li>6 Workspeace</li>
+                                <li>Enhanced Security</li>
+                            </ul>
+                          </div>
+                       <a class="btn" href="#">Start Trial</a>
+                    </div>
+                </div>
+
+                <!-- Pricing Table -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="price-item" data-connectors="1">
+                        <div class="info">
+                            <h3>Enterprise</h3>
+                            <p class="price">$99.00</p>
+                        </div>
+                        <div class="features">
+                            <p>For Individual Uses</p>
+                            <ul>
+                                <li>15 Users</li>
+                                <li>10 Projects</li>
+                                <li>30 GB of Storage</li>
+                                <li>6 Workspeace</li>
+                                <li>Enhanced Security</li>
+                            </ul>
+                        </div>
+                        <a class="btn" href="#">Start Trial</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- Price area ends -->
+
+
+    <!-- Action starts -->
+    <section id="action" class="action-area section-big">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-md-5 col-sm-5">
+                    <div class="action-img">
+                        <img src="{% static '' %}assets/img/cta/cta.png" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-7 col-sm-7">
+                    <div class="content-box">
+                        <h2>Get the App from your <br> phone's platform</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua.</p>
+
+                        <div class="btn-set">
+                            <a href="" class="btn btn-black">
+                                <i class="fa fa-android"></i>
+                                <div class="btn-text">
+                                    <h3>Download</h3>
+                                    <p>it from Playstore</p>
+                                </div>
+                            </a>
+                            <a href="" class="btn btn-white">
+                                <i class="fa fa-apple"></i>
+                                <div class="btn-text">
+                                    <h3>Download</h3>
+                                    <p>it from Appstore</p>
+                                </div>
+                            </a>
+                        </div>
+                        
+                    </div>
+
+                    
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Action area ends -->
+
+    <!-- Blog News area start -->
+    <section id="blog" class="news-area section-big">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-12 text-center">
+                    <div class="section-title">
+                        <h2>Latest Blog News</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 col-sm-6">
+                   <div class="news-box clearfix">
+                       <img src="{% static '' %}assets/img/news/news-1.png" alt="">
+                        <h3>Renovated Appartment</h3>
+                        <span class="lnr lnr-user"></span>
+                        <span>Mark James</span>
+                        <span class="lnr lnr-calendar-full"></span>
+                        <span>10 Aug, 2018</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                   </div> 
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="news-box clearfix">
+                       <img src="{% static '' %}assets/img/news/news-2.png" alt="">
+                        <h3>Renovated Appartment</h3>
+                        <span class="lnr lnr-user"></span>
+                        <span>Mark James</span>
+                        <span class="lnr lnr-calendar-full"></span>
+                        <span>10 Aug, 2018</span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                   </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- News area ends -->
+
+
+    <!-- Subscribe area starts -->
+    <section id="subscribe" class="subscribe-area section-big">
+        <div class="container">
+            <div class="subscribe-box">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="subscribe-text">
+                            <h2>Subscribe Newsletter</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod lorem ipsum dolor sit amet.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <form id="mc-form" class="mc-form">
+                            <div class="newsletter-form">
+
+                                <input type="email" autocomplete="off" id="mc-email" placeholder="Enter email address" class="form-control" name="EMAIL">
+
+                                <button class="btn mc-submit" type="submit">Subscribe</button>                                
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod</p>
+                                <div class="clearfix"></div>
+
+                                <!-- mailchimp-alerts Start -->
+                                <div class="mailchimp-alerts">
+                                    <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                                    <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                                    <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                                </div>
+                                <!-- mailchimp-alerts end -->
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Subscribe area ends -->
+
+    <!-- Contact form area start -->
+    <section id="contact" class="contact-form-area section-big">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="section-title">
+                        <h2>Keep in Touch</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form-area">
+            <div class="container">
+                <div class="map clearfix">
+
+                    <!-- Google Map starts-->
+                    <div class="col-md-6">
+                        <div class="map-area">
+                            <div id="contactgoogleMap"></div>
+                        </div>
+                    </div>
+                    <!-- Google Map ends -->
+
+                    <div class="col-md-6">
+                        <div class="contact-form clearfix">
+
+                            <form id="ajax-contact" action="assets/mailer.php" method="post">
+                                <div class="form-group in_name col-md-12">
+                                    <input type="email" name="email" class="form-control" id="name" placeholder="Email" required="required">
+                                </div>
+                                <div class="form-group in_email col-md-12">
+                                    <input type="text" name="name" class="form-control" id="email" placeholder="Your name" required="required">
+                                </div>
+                                <div class="form-group in_name col-md-12">
+                                    <input type="text" name="subject" class="form-control" id="subject" placeholder="Subject" required="required">
+                                </div>
+                                <div class="form-group in_message col-md-12">
+                                    <textarea rows="6" cols="8" name="message" class="form-control" id="message" placeholder="Your message" required="required"></textarea>
+                                </div>
+                                <div class="actions clearfix">
+                                    <input type="submit" value="Send Message" name="submit" id="submitButton" class="form-btn blog-gradient" title="Submit Your Message!">
+                                </div>
+                            </form>
+
+                            <!-- Submition status -->
+                            <div id="form-messages"></div>
+
+                        </div>
+                    <!-- Contact form ends-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Contact form area ends -->
+
+
+    <!-- Footer area starts -->
+    <footer>
+
+        <div class="footer-widget-area section-big">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Footer Widget -->
+                    <div class="col-md-3">
+                        <div class="footer-widget">
+                            <h3>About Pushpo</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </p>
+                        </div>
+                    </div>
+
+                    <!-- Footer Widget -->
+                    <div class="col-md-3">
+                        <div class="footer-widget">
+                            <h3>Some Quick Links</h3>
+                            <ul>
+                                <li><a href="#">Help Center</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                                <li><a href="#">Hot Deals</a></li>
+                                <li><a href="#">About Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Footer Widget -->
+                    <div class="col-md-3">
+                        <div class="footer-widget">
+                            <h3>Company Essentials</h3>
+                            <ul>
+                                <li><a href="#">Help Center</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                                <li><a href="#">Hot Deals</a></li>
+                                <li><a href="#">About Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Footer Widget -->
+                    <div class="col-md-3">
+                        <div class="footer-widget">
+                            <h3>About Pushpo</h3>
+                            <div class="address">
+                                <div class="address-box clearfix">
+                                    <span class="lnr lnr-home"></span>
+                                    <p>1502 N Elm St, Fairmont, MN 56031 United States</p>
+                                </div>
+                                <div class="address-box clearfix">
+                                    <span class="lnr lnr-phone"></span>
+                                    <p><a href="tel:015110022">+00 123-456-789</a>
+                                    <br>
+                                    <a href="tel:015110022">+00 123-456-789</a></p>
+                                </div>
+                                <div class="address-box clearfix">
+                                    <span class="lnr lnr-envelope"></span>
+                                    <p><a href="mailto:email@yourdomain.com">email@yourdomain.com</a></p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>            
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- Footer Bottom area -->
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>Copyright &copy; 2018. All rights reserved to <a href="#">CodersPoint</a></p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- Footer area ends -->
+
+
+
+    <!-- Latest jQuery -->
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+
+    <!-- Plugin js -->
+    <script src="{% static 'assets/js/plugin.js' %}"></script>
+
+    <!-- GOOGLE MAP JS -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0YyDTa0qqOjIerob2VTIwo_XVMhrruxo"></script>
+
+    <!-- Main js-->
+    <script src="{% static 'assets/js/main_script.js' %}"></script>
+
+
+</body>
+
+</html>

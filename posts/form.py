@@ -13,6 +13,7 @@ class PostForm(forms.ModelForm):
         ]
         widgets = {
             "title": forms.TextInput(attrs={'class':'form-control'}),
+            "content": CKEditor5Widget()
         }
 class UserprofileForm(forms.ModelForm):
     class Meta:
@@ -22,6 +23,7 @@ class UserprofileForm(forms.ModelForm):
             "birth",
             "profession",
             "about_me",
+            "profile_img",
         ]
         widgets = {
             "profession": forms.TextInput(attrs={'class':'form-control'}),

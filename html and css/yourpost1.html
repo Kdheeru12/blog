@@ -11259,6 +11259,13 @@ body:after {
 {%  if user.is_authenticated %}
 	<div class="about" id="about">
 		<div class="container">
+      {% if user1.profile_img == ''  %}
+      {% else %}
+      <div class="col-md-4 about-left">
+        <img src="/media/{{user1.profile_img}}" class="img-responsive" alt="">
+        {{user1.profile_img}}
+      </div>
+      {% endif %}
 				<div class="col-md-7 about-right">
 				<div class="about-me">
 				<h2>{{user.first_name}} {{user.last_name}}</h2>
@@ -11338,33 +11345,32 @@ body:after {
               <div class="mbr-section-btn">
                 <a class="btn btn-md btn-black-outline display-4" href="/{{Post.slug}}/post-detail">
                   <span class="mbri-preview mbr-iconfont mbr-iconfont-btn">
-                  </span>READ MORE</a></div>
-            </div>
-            {% else %}
-            <div class="mbr-section-btn">
-              <a class="btn btn-md btn-black-outline display-4" href="/error">
-                <span class="mbri-preview mbr-iconfont mbr-iconfont-btn">
-                </span>LOGIN TO READ MORE</a>
-            </div>
-            {% endif %}
-            <div class="mbr-section-btn">
-            <form action="/{{Post.slug}}/edit" method="POST" class="mbr-section-btn">
-              {% csrf_token %}
-              {% if user.is_authenticated %}
-              <a href="/{{Post.slug}}/edit"><button class="btn btn-md btn-black-outline display-4" >edit</button></a>
-             {% else %}
-              <a href="/error"><button class="btn btn-md btn-black-outline display-4" >login to edit</button></a>
-              {% endif %}
-            </form>
-            <form action="/{{Post.slug}}/post-delete" method="POST" class="mbr-section-btn">
-                {% csrf_token %}
-                {% if user.is_authenticated %}
-                <a href="/{{Post.slug}}/post-delete"><button class="btn btn-md btn-black-outline display-4">delete</button></a>
-               {% else %}
-                <a href="/error"><button class="btn btn-md btn-black-outline display-4" >login to edit</button></a>
+                  </span>READ MORE</a>
+                </div>
+                {% else %}
+                <div class="mbr-section-btn">
+                  <a class="btn btn-md btn-black-outline display-4" href="/error">
+                    <span class="mbri-preview mbr-iconfont mbr-iconfont-btn">
+                    </span>LOGIN TO READ MORE</a>
+                </div>
                 {% endif %}
-            </form>
-        </div>
+                <form action="/{{Post.slug}}/edit" method="POST" class="mbr-section-btn">
+                  {% csrf_token %}
+                  {% if user.is_authenticated %}
+                  <button class="btn btn-md btn-black-outline display-4" >edit</button>
+                 {% else %}
+                  <a href="/error"><button class="btn btn-md btn-black-outline display-4" >login to edit</button></a>
+                  {% endif %}
+                </form>
+                <form action="/{{Post.slug}}/post-delete" method="POST" class="mbr-section-btn">
+                    {% csrf_token %}
+                    {% if user.is_authenticated %}
+                    <a href="/{{Post.slug}}/post-delete"><button class="btn btn-md btn-black-outline display-4">delete</button></a>
+                   {% else %}
+                    <a href="/error"><button class="btn btn-md btn-black-outline display-4" >login to edit</button></a>
+                    {% endif %}
+                </form>
+            </div>
               </div>
           </div>
           <hr>

@@ -204,8 +204,23 @@ img{
 .section{
     width: 100%;
     height: 80vh;
-    background: linear-gradient(135deg,rgb(400, 72, 50,.9) 10%,rgb(241, 171, 40)
-    100%);
+   /* background-color: #738bdc;
+/*background-image: linear-gradient(315deg, #738bdc 0%, #48c3eb 74%);*/
+/*background-image: linear-gradient(to top, #52e3f4, #1cd2f5, #00c0f5, #00acf2, #1298eb);
+    */
+ /* background-image: linear-gradient(to top, #38d8e4, #06cdea, #00c1ee, #06b5ef, #36a7ed);*/
+/*background-image: linear-gradient(to right top, #5fadf7, #4a9ff6, #3791f3, #2882f0, #2172eb);
+background-color: #734ae8;
+background-image: linear-gradient(315deg, #734ae8 0%, #89d4cf 74%);
+background-image: linear-gradient(to right top, #85aff4, #7fa8f4, #79a0f3, #7598f2, #7290f0);
+background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #90a1e6, #87a8ea, #7eaeed, #77b2f1, #70b7f5, #68bbf8, #5fbffb);
+background-image: linear-gradient(to right top, #5599ee, #609ced, #6a9eec, #74a1ea, #7ca4e9, #7ca3ea, #7ba3ec, #7ba2ed, #739df1, #6c98f4, #6593f8, #5f8efb);
+background: #e0c4fc; background: -moz-linear-gradient(to bottom,  #e0c4fc 0%,#90c6fd 100%); background: -webkit-linear-gradient(to bottom,  #e0c4fc 0%,#90c6fd 100%); background: linear-gradient(to bottom,  #e0c4fc 0%,#90c6fd 100%);
+background: #7bf1f0; background: -moz-linear-gradient(to right,  #7bf1f0 0%,#7bb8f1 100%); background: -webkit-linear-gradient(to right,  #7bf1f0 0%,#7bb8f1 100%); background: linear-gradient(to right,  #7bf1f0 0%,#7bb8f1 100%);
+background: #c1e3ff; background: -moz-linear-gradient(45deg,  #c1e3ff 0%,#abc7ff 100%); background: -webkit-linear-gradient(45deg,  #c1e3ff 0%,#abc7ff 100%); background: linear-gradient(45deg,  #c1e3ff 0%,#abc7ff 100%);
+background: #46aef7; background: -moz-linear-gradient(to right,  #46aef7 0%,#30c7ec 53%,#16d9e3 100%); background: -webkit-linear-gradient(to right,  #46aef7 0%,#30c7ec 53%,#16d9e3 100%); background: linear-gradient(to right,  #46aef7 0%,#30c7ec 53%,#16d9e3 100%);
+background: #5f9dea; background: -moz-linear-gradient(to right,  #5f9dea 0%,#aaedfc 100%); background: -webkit-linear-gradient(to right,  #5f9dea 0%,#aaedfc 100%); background: linear-gradient(to right,  #5f9dea 0%,#aaedfc 100%);*/
+    background-image: linear-gradient(45deg, #B066FE, #63E2FF);
     background-size: cover;
     position: relative;
 }
