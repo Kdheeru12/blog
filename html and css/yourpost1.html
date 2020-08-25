@@ -11329,7 +11329,7 @@ body:after {
           <div class="row justify-content-md-center">
               <div class="col-md-10 align-center">
                   <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-5">
-                    {{Post.title}}
+                    {{Post.title}} {% if Post.draft %} <span style="color: red;">DRAFT</span>{% endif %}
                   </h1>
                   
                   <p class="mbr-text pb-3 mbr-fonts-style display-7">

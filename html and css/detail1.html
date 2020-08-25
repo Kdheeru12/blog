@@ -44,6 +44,9 @@
         section{
             background-color:#fff;
         }
+        blockquote{
+            font-size:17px ;
+        }
     </style>
 </head>
 
@@ -57,14 +60,14 @@
     <div class="menu-area navbar-fixed-top">
         <div class="container">
             <div class="row">
-
+ 
                 <!-- Navigation starts -->
                 <div class="col-md-12">
                     <div class="mainmenu">
                         <div class="navbar navbar-nobg">
                             <div class="navbar-header">
                                 <a class="navbar-brand" href="index.html">
-                                    <img src="assets/img/logo.png" alt="">
+                                    
                                 </a>
                                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                                     <span class="sr-only">Toggle navigation</span>
@@ -73,29 +76,37 @@
                                     <span class="icon-bar"></span>
                                 </button>
                             </div>
-
+                            {% if request.user.is_authenticated %}
                             <div class="navbar-collapse collapse">
                                 <nav>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="index.html#slider">HOME</a></li>
-                                        <li><a href="index.html#feature">FEATURES</a></li>
-                                        <li><a href="index.html#screenshot">SCREENSHOTS</a></li>
-                                        <li><a href="index.html#price">PRICE</a></li>
+                                        <li><a href="/myposts">MY BLOGS</a></li>
+                                        <li><a href="/blogs">EXPLORE BLOGS</a></li>
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">BLOG <b class="caret"></b></a>
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROFILE<b class="caret"></b></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="blog.html">BLOG DEFAULT</a></li>
-                                                <li><a href="blog-grid.html">BLOG GRID VIEW</a></li>
-                                                <li><a href="blog-full.html">BLOG FULL WIDTH</a></li>
-                                                <li><a href="single-post.html">SINGLE POST</a></li>
-                                                <li><a href="404.html">404 PAGE</a></li>
+                                                <li><a href="/profile">MY PROFILE</a></li>
+                                                <li><a href="/logout">LOGOUT</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">CONTACT</a></li>
-                                        <li><a class="btn hidden-xs hidden-sm" href="">Download Now</a></li>
+                                        <li><a href="/contact-us" class="nav-link" target="_blank">CONTACT</a></li>
+                                        
                                     </ul>
                                 </nav>
                             </div>
+                            {%  else %}
+                             <div class="navbar-collapse collapse">
+                                <nav>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a class="smooth_scroll" href="/">HOME</a></li>
+                                        <li><a  href="/blogs">EXPLORE BLOGS</a></li>
+                                        <li><a  href="/login">LOGIN</a></li>
+                                        <li><a class="smooth_scroll" href="signup">SIGNUP</a></li>
+                                        <li><a href="/contact-us" class="nav-link" target="_blank">CONTACT</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -110,8 +121,11 @@
 
     <section class="page-title section-big text-center blog-gradient">
         <div class="container">
-            <h2>Blog Details</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <img src="{% static 'assets/img/favicon2.png' %}" alt="">
+            <h2>{{instance.title}}</h2>
+            <br>
+            
+            by<a style="color: white;" href="/{{profile.username}}/posts"> {{instance.user.get_full_name}}</a>
         </div>
     </section>
 
@@ -119,11 +133,11 @@
 
     <div class="text-center bredcrumb-area">
         <div class="bredcrumb-box">
-            <a href="#slider">Home</a>
+            <a href="/">Home</a>
             <span class="lnr lnr-arrow-right"></span>
-            <a href="#blog-home">Blog</a>
+            <a href="/blogs">Blogs</a>
             <span class="lnr lnr-arrow-right"></span>
-            <a href="#blog-home">Blog details</a>
+            <a href="">Blog details</a>
         </div>
      </div>
 
@@ -131,7 +145,7 @@
     <section class="container blog-full-width">
        <div class="row">
            <div class="col-md-8">
-               <div class="blog-content">
+               <div class="blog-content" style="font-size:18px;" >
                     {{instance.content|safe}}
                 </div>
                 <!--Blog full width area ends -->
@@ -169,7 +183,7 @@
                                 <div class="comment-box">
                                     <div class="comment-content clearfix">
                                         <img src="assets/img/blog/comment2.jpg" alt="">
-                                        <h4>{{subc.user.username}}</h4>
+                                        <h4>{{subc.user.first_name}}</h4>
                                         <span>{{subc.time}} - </span>
                                     </div>
                                     <p>{{subc.comm}}</p>
@@ -188,7 +202,8 @@
           
                                 <div class="row">
                                     <input type='text' value='${id}' name = 'comm_id' hidden/>
-                                    <textarea name="comm" cols="1" rows="7" class="form-control" placeholder="Your message"></textarea>
+                                    <textarea style="font-size:15px;" name="comm"class="form-control" placeholder="Your View"></textarea>
+                                    
                                     
                                 </div>
                                 <div class="row">
@@ -206,12 +221,12 @@
   
                         <div class="row">
 
-                            <textarea name="comm" cols="1" rows="7" class="form-control" placeholder="Your message"></textarea>
+                            <textarea style="font-size:15px;" name="comm"class="form-control" placeholder="Your View"></textarea>
                             
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <button class="form-btn blog-gradient">Submit Comment</button>
+                                <button class="form-btn blog-gradient">Post Comment</button>
                             </div>
                         </div>
                     </form>
@@ -224,13 +239,13 @@
                 <!-- widget-search -->  
                 <div class="widget widget-search">
                     
-                    <form name="search" method="get" action="#">
-                        <input type="search" name="search" placeholder="Search blog">
-                        <button class="blog-gradient">
+                    <form action="/blogs">
+                        <input id='search-bar' type='search' placeholder='Search...' autocomplete="off" name="q" value="{{request.GET.q}}" />
+                        
+                        <button type="" class="widget-search-btn blog-gradient">
                             <i class="fa fa-search"></i>
                         </button>
-                    </form>
-                    
+                    </form>  
                 </div> 
                 <!-- widget recent post -->
 
@@ -240,32 +255,33 @@
                  <div class="widget widget-post-categories">
                     <h3>Post Categories</h3>
                     <ul class="post-categorie">
-                         <li><a href="#">Art & Culture(25)</a></li>
-                         <li><a href="#">Beauty & Fashion(36)</a></li>
-                         <li><a href="#">Sports(22)</a></li>
-                         <li><a href="#">Lifestyle(20)</a></li>
-                         <li><a href="#">Technology(50)</a></li>
-                         <li><a href="#">Economics(33)</a></li>
+                        <form action="/blogs">  
+                         <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Art & Culture"/></li>
+                         <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Beauty & Fashion"/></li>
+                         <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Sports"/></li>
+                         <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Lifestyle"/></li>
+                         <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Technology"/></li>
+                         <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Economics"/></li>
+                        </form>
                     </ul>
-                 </div>
+                </div>
 
                  <!-- widget post tags -->
 
                  <div class="widget widget-tags">
-                     <h3>Post Tags</h3>
-                     <ul class="post-tags">
-                         <li><a href="#">Art & Culture</a></li>
-                         <li><a href="#">Beauty & Fashion</a></li>
-                         <li><a href="#">Sports</a></li>
-                         <li><a href="#">Lifestyle</a></li>
-                         <li><a href="#">Technology</a></li>
-                         <li><a href="#">Art & Culture</a></li>
-                         <li><a href="#">Beauty & Fashion</a></li>
-                         <li><a href="#">Sports</a></li>
-                         <li><a href="#">Lifestyle</a></li>
-                         <li><a href="#">Technology</a></li>
+                    <h3>Post Tags</h3>
+                    <ul class="post-tags">
+                        <form action="/blogs">  
+                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Art & Culture"/></li>
+                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Beauty & Fashion"/></li>
+                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Sports"/></li>
+                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Lifestyle"/></li>
+                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Technology"/></li>
+                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Economics"/></li>
+                        </form>
+    
                     </ul>
-                 </div>
+                </div> 
 
            </div>
        </div>
@@ -281,7 +297,7 @@
                     <!-- Footer Widget -->
                     <div class="col-md-3">
                         <div class="footer-widget">
-                            <h3>About Pushpo</h3>
+                            <h3>About EXPRESIO</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </p>
                         </div>
                     </div>
@@ -301,23 +317,10 @@
                     </div>
 
                     <!-- Footer Widget -->
-                    <div class="col-md-3">
-                        <div class="footer-widget">
-                            <h3>Company Essentials</h3>
-                            <ul>
-                                <li><a href="#">Help Center</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Hot Deals</a></li>
-                                <li><a href="#">About Us</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
                     <!-- Footer Widget -->
                     <div class="col-md-3">
                         <div class="footer-widget">
-                            <h3>About Pushpo</h3>
+                            <h3>About EXPRESIO</h3>
                             <div class="address">
                                 <div class="address-box clearfix">
                                     <span class="lnr lnr-home"></span>
@@ -325,13 +328,13 @@
                                 </div>
                                 <div class="address-box clearfix">
                                     <span class="lnr lnr-phone"></span>
-                                    <p><a href="tel:015110022">+00 123-456-789</a>
+                                    <p><a href="tel:015110022">9381132562</a>
                                     <br>
-                                    <a href="tel:015110022">+00 123-456-789</a></p>
+                                    <a href="tel:015110022"></a></p>
                                 </div>
                                 <div class="address-box clearfix">
                                     <span class="lnr lnr-envelope"></span>
-                                    <p><a href="mailto:email@yourdomain.com">email@yourdomain.com</a>
+                                    <p><a href="mailto:noreply.blogzz@gmail.com">noreply.blogzz@gmail.com</a>
                                 </div>
                                 
                             </div>
@@ -350,7 +353,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <p>Copyright &copy; 2018. All rights reserved to <a href="#">CodersPoint</a></p>
+                        <p>Copyright &copy; 2020. All rights reserved to <a href="#">EXPRESIO</a></p>
                     </div>
                     
                 </div>

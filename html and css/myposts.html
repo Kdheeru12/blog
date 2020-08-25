@@ -465,11 +465,13 @@ button:focus+.design-container {
           <div class="card-front">
             <figure>
              
-              <figcaption>{{Post.title|truncatechars:26}}</figcaption>
+              <h1>{{Post.title|truncatechars:26}}</h1> {% if Post.draft %} <span style="color: red;">DRAFT</span>{% endif %}
             </figure>
       
                 <p>
                     {{Post.content|truncatechars:200}}
+                    hh
+                    {{Post.draft}}
                     <br>
                     <span>
                         Author:{{Post.user.get_full_name}}

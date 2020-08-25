@@ -11267,12 +11267,16 @@ body:after {
       {% endif %}
 				<div class="col-md-7 about-right">
 				<div class="about-me">
-				<h2>{{user.first_name}} {{user.last_name}}</h2>
-				<h4> {{user1.profession}} </h4>
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+        {% if user1.profession %}
+        <h4> {{user1.profession}} </h4>
+        {% endif %}
 				</div>
 				<div class="w3layouts_more-buttn">
 				<p>
+          {% if user1.about_me %}
                     {{user1.about_me}}
+          {% end if %}
 				</p>
 				<div class="buttn-about">
                                 <a href="/">Home Page</a>

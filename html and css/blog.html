@@ -110,11 +110,9 @@
                              <div class="navbar-collapse collapse">
                                 <nav>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a  href="/login">EXPLORE BLOGS</a></li>
+                                        <li><a  href="/">HOME</a></li>
+                                        <li><a  href="/blogs">EXPLORE BLOGS</a></li>
                                         <li><a  href="/login">LOGIN</a></li>
-                                        <li><a class="smooth_scroll" href="#feature">FEATURES</a></li>
-                                        <li><a class="smooth_scroll" href="#screenshot">SCREENSHOTS</a></li>
-                                        <li><a class="smooth_scroll" href="#price">PRICE</a></li>
                                         <li><a href="/contact-us" class="nav-link" target="_blank">CONTACT</a></li>
                                     </ul>
                                 </nav>
@@ -190,7 +188,7 @@
                 <span class="lnr lnr-user"></span>
                 <span>{{Post.user.get_full_name}}</span>
                 <span class="lnr lnr-calendar-full"></span>
-                <span>10 Aug, 2018</span>
+                <span> {{Post.updated|timesince}} </span>
             </div>
                 <div style="text-align: center;padding-left:30px;"> 
                 <p>{{Post.content|safe|linebreaks|truncatechars:600}} </p>    
@@ -260,7 +258,7 @@
             <div class="widget widget-tags">
                 <h3>Post Tags</h3>
                 <ul class="post-tags">
-                    <form action="blogs">  
+                    <form action="/blogs">  
                         <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Art & Culture"/></li>
                         <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Beauty & Fashion"/></li>
                         <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Sports"/></li>
@@ -293,7 +291,7 @@
                 <!-- Footer Widget -->
                 <div class="col-md-3">
                     <div class="footer-widget">
-                        <h3>About Pushpo</h3>
+                        <h3>About EXPRESIO</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </p>
                     </div>
                 </div>
@@ -313,37 +311,24 @@
                 </div>
 
                 <!-- Footer Widget -->
-                <div class="col-md-3">
-                    <div class="footer-widget">
-                        <h3>Company Essentials</h3>
-                        <ul>
-                            <li><a href="#">Help Center</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li><a href="#">Hot Deals</a></li>
-                            <li><a href="#">About Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-
                 <!-- Footer Widget -->
                 <div class="col-md-3">
                     <div class="footer-widget">
-                        <h3>About Pushpo</h3>
+                        <h3>About EXPRESIO</h3>
                         <div class="address">
                             <div class="address-box clearfix">
                                 <span class="lnr lnr-home"></span>
-                                <p>1502 N Elm St, Fairmont, MN 56031 United States</p>
+                                <p>HYDERABAD TELANGANA INDIA</p>
                             </div>
                             <div class="address-box clearfix">
                                 <span class="lnr lnr-phone"></span>
-                                <p><a href="tel:015110022">+00 123-456-789</a>
+                                <p><a href="tel:9381132562">9381132562</a>
                                 <br>
-                                <a href="tel:015110022">+00 123-456-789</a></p>
+                                <a href="tel:015110022"></a></p>
                             </div>
                             <div class="address-box clearfix">
                                 <span class="lnr lnr-envelope"></span>
-                                <p><a href="mailto:email@yourdomain.com">email@yourdomain.com</a>
+                                <p><a href="mailto:noreply.blogzz@gmail.com">noreply.blogzz@gmail.com</a>
                             </div>
                             
                         </div>
@@ -362,7 +347,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <p>Copyright &copy; 2018. All rights reserved to <a href="#">CodersPoint</a></p>
+                    <p>Copyright &copy; 2020. All rights reserved to <a href="#">EXPRESIO</a></p>
                 </div>
                 
             </div>

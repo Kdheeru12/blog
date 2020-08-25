@@ -65,11 +65,19 @@
                         <div class="dragArea row">
                             <div class="col-md-4  form-group" data-for="name">
                                 <label for="name-form1-k" class="form-control-label mbr-fonts-style display-7">Name</label>
+                                {% if request.user.is_authenticated %}
+                                <input type="text" name="name" data-form-field="Name" required="required" value="{{user.first_name}}" class="form-control display-7" id="name-form1-k">
+                                {% else %}
                                 <input type="text" name="name" data-form-field="Name" required="required" class="form-control display-7" id="name-form1-k">
+                                {% endif %}
                             </div>
                             <div class="col-md-4  form-group" data-for="email">
                                 <label for="email-form1-k" class="form-control-label mbr-fonts-style display-7">Email</label>
+                                {% if user.is_authenticated %}
+                                <input type="email" name="email" data-form-field="Email" required="required" class="form-control display-7" value="{{user.username}}" id="email-form1-k">
+                                {% else %}
                                 <input type="email" name="email" data-form-field="Email" required="required" class="form-control display-7" id="email-form1-k">
+                                {% endif %}
                             </div>
                             
                             <div data-for="message" class="col-md-12 form-group">

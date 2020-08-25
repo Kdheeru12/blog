@@ -21,7 +21,7 @@ from django_ckeditor_5.fields import CKEditor5Field
 import os
 import json
 from django.http import HttpResponse
-
+from taggit.models import Tag
 def homepage(request):
     post=Post.objects.all()
     post_list = Post.objects.all()
@@ -40,15 +40,15 @@ def homepage(request):
     post = paginator.get_page(page_number)
     return render(request,'index2.html',{'post':post})
 def blogs(request):
-    post=Post.objects.all()
-    post_list = Post.objects.all()
+    post=Post.objects.filter(draft=False)
+    post_list = Post.objects.filter(draft=False)
     print(post)
     query = request.GET.get("q")
     print(query)
     if query:
         post_list = post_list.filter(
             Q(title__icontains=query) |
-            Q(content__icontains=query)
+            Q(content__icontains=query) 
             ).distinct()
 
     paginator = Paginator(post_list, 10) # Show 25 contacts per page.
@@ -60,18 +60,12 @@ def signup(request):
     if request.method == 'POST':
         first_name = request.POST['first']
         last_name = request.POST['last']
-        phonenumber = request.POST['phone']
         email = request.POST['email']
         UserName = request.POST['username']
-        password = request.POST['password']
-        dateofbirth = request.POST['date']
         globals()['first_name']=first_name
         globals()['last_name']=last_name
         globals()['email'] = email
-        globals()['password']= password
-        globals()['phonenumber'] = phonenumber
         globals()['username'] = UserName
-        globals()['date'] = dateofbirth
         if User.objects.filter(email=email).exists():
             messages.info(request,'Email Already exist')
             return redirect('signup')
@@ -107,9 +101,10 @@ def verification(request):
             return redirect('signup')
         print(user)
         if email_otp == otp or '12345' and user == False:
+            password = request.POST['password']
             messages.info(request,'otp verified')
             user = User.objects.create_user(username=email,password=password,email=email,first_name=first_name,last_name=last_name)
-            user_profile = Userprofile(user=email,phone=phonenumber,username=username,birth=date)
+            user_profile = Userprofile(user=email,username=username)
             user.save()
             user_profile.save()
             return redirect('login')
@@ -244,7 +239,7 @@ def myposts(request):
 def othersposts(request,user=None):
     user1 = get_object_or_404(Userprofile,username=user)
     print(user1.user)
-    post = Post.objects.filter(email=user1)
+    post = Post.objects.filter(email=user1,draft=False)
     name = get_object_or_404(User,username=user1)
     print(post)
     use=User.objects.filter(email=user1)

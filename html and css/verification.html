@@ -13,20 +13,19 @@
             <div class="user signinbox">
                 <div class="imagebox"><img src="{% static 'css/images/Signup2.jpeg' %}" alt=""></div>
                 <div class="formbox">
-                    <form action="verification" method="POST">
+                    <form autocomplete="off" action="verification" method="POST">
                         {% csrf_token %}
-                        <h2>>EMAIL VERIFICATION</h2>
-                        <input type="text" placeholder="Otp sent To your Email" name="otp">
-                        <button type="submit">Signup</button>
+                        <h2>EMAIL VERIFICATION</h2>
+                        <input type="text" autocomplete="false" placeholder="Otp sent To your Email" name="otp" required>
+                        <input type="password" autocomplete="false" placeholder="Password" name="password" required>
+                        <button type="submit">Verify Your Accout</button>
                         <p class="signup">login and enjoy reading <a href="login">LOGIN</a></p>
-                        <div>
-                            {% for message in messages%}
-                            <span class="message">{{message}}</span>
-                            {% endfor %}
-                        </div>
+                        {% for message in messages%}
+                        <span class="message">{{message}} + </span>
+                        {% endfor %}
+                    
                     </form>
                 </div>
-            
             </div>
             
         </div>

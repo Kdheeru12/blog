@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ckeditor',
     'django_ckeditor_5',
     'ckeditor_uploader',
+    'taggit'
 
 ]
 CKEDITOR_UPLOAD_PATH="uploads/"

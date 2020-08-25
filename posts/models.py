@@ -12,6 +12,7 @@ from django.db.models.fields import (
 )
 from django.contrib.auth.models import User
 import datetime
+from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 # Create your models here. 
 class Post(models.Model):
@@ -23,6 +24,8 @@ class Post(models.Model):
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="likes", blank=True)
     updated = models.DateTimeField(auto_now=True,auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False,auto_now_add=True)
+    draft = models.BooleanField(default=False)
+    tags = TaggableManager()
     def __unicode__(self):
         return self.title
     def __str__(self):

@@ -10,10 +10,12 @@ class PostForm(forms.ModelForm):
         fields = [
             "title",
             "content",
+            "draft"
         ]
         widgets = {
             "title": forms.TextInput(attrs={'class':'form-control'}),
             "content": CKEditor5Widget()
+            
         }
 class UserprofileForm(forms.ModelForm):
     class Meta:

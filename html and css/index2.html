@@ -88,7 +88,7 @@
                              <div class="navbar-collapse collapse">
                                 <nav>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a  href="/login">EXPLORE BLOGS</a></li>
+                                        <li><a  href="/blogs">EXPLORE BLOGS</a></li>
                                         <li><a  href="/login">LOGIN</a></li>
                                         <li><a class="smooth_scroll" href="#feature">FEATURES</a></li>
                                         <li><a class="smooth_scroll" href="#screenshot">SCREENSHOTS</a></li>
@@ -123,19 +123,19 @@
                     {% else %}
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="slider-text clearfix">
-                            <h1>One Simple App <br> You Can Find Anything</h1>
-                            <p>Serenity has taken posse ssion of mine entire soul posse ssion of my entire soul which I enjoy with my whole heart. Serenity has taken posse ssion of mine has taken possession of mine entire soul possession entire soul heart.</p>
+                            <h1>One Simple Website</h1>
+                            <p> One place to find the smartest writers and Soulful Ideas for Dreamers Instant setup With just a click Get Unlimited access to intelligent and Inspiring Stories Sign Up to Create New thoughts Confidently and Authentically in your own stories</p>
                     {% endif %}
                             <div class="btn-set">
                                 {% if user.is_authenticated %}
-                                <a href="" class="btn btn-black">
+                                <a href="/createpost" class="btn btn-black">
                                     <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
                                     <div class="btn-text">
                                         <h3>Create Post</h3>
                                         <p></p>
                                     </div>
                                 </a>
-                                <a href="" class="btn btn-white">
+                                <a href="/blogs" class="btn btn-white">
                                     <i class="fa fa-heart"></i>
                                     <div class="btn-text">
                                         <h3>Explore Blogs</h3>
@@ -143,14 +143,14 @@
                                     </div>
                                 </a>
                                 {% else %}
-                                <a href="" class="btn btn-black">
+                                <a href="/signup" class="btn btn-black">
                                     <i class="fa fa-user-plus" aria-hidden="true"></i>
                                     <div class="btn-text">
                                         <h3>SignUp/Login</h3>
-                                        <p></p>
+                                        <p>fheeeraj</p>
                                     </div>
                                 </a>
-                                <a href="" class="btn btn-white">
+                                <a href="/blogs" class="btn btn-white">
                                     <i class="fa fa-heart"></i>
                                     <div class="btn-text">
                                         <h3>Explore Blogs</h3>
@@ -187,7 +187,8 @@
                     <div class="hero-box">
                         <span class="lnr lnr-lock"></span>
                         <h3>Instant Setup</h3>
-                        <p>Lorem ipsum dolor sit amet, consect eturys adipisicing elit, sed do eiusmod tempor et dolore magna aliqua. nisiut aliquip nisiut aliquip exea comodo aliquip.</p>
+                        <p>Stories from Young and Experienced Writers which will drive you to Pursue Your Dreams
+                             Great support</p>
                     </div>
                 </div>
 
@@ -196,7 +197,10 @@
                     <div class="hero-box">
                         <span class="lnr lnr-flag"></span>
                         <h3>Fast Loading</h3>
-                        <p>Lorem ipsum dolor sit amet, consect eturys adipisicing elit, sed do eiusmod tempor et dolore magna aliqua. nisiut aliquip nisiut aliquip exea comodo aliquip.</p>
+                        <p> Special features of Expresio
+
+                             is a Soulful Studio to Craft Visual stories that Honour not only what you do,but who you are
+                             Through Thoughtful and Immersive Design,We celebrate your story and empower you with Tools you need to stand out and share it with the world</p>
                     </div>
                 </div>
 
@@ -317,7 +321,7 @@
                 <!-- screenshots starts -->
                 <div class="screenshots">
                     <div class="screen">
-                        <a href="assets/img/screenshots/1.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/1.png" alt=""></a>
+                        <a href="assets/img/screenshots/1.png" class="screen-popup"><img src="{% static 'assets/img/screenshots/12.png' %}" alt=""></a>
                     </div>
                     <div class="screen">
                         <a href="assets/img/screenshots/2.png" class="screen-popup"><img src="{% static '' %}assets/img/screenshots/2.png" alt=""></a>
@@ -728,15 +732,15 @@
         <div class="footer-widget-area section-big">
             <div class="container">
                 <div class="row">
-
+    
                     <!-- Footer Widget -->
                     <div class="col-md-3">
                         <div class="footer-widget">
-                            <h3>About Pushpo</h3>
+                            <h3>About EXPRESIO</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </p>
                         </div>
                     </div>
-
+    
                     <!-- Footer Widget -->
                     <div class="col-md-3">
                         <div class="footer-widget">
@@ -750,64 +754,51 @@
                             </ul>
                         </div>
                     </div>
-
+    
+                    <!-- Footer Widget -->
                     <!-- Footer Widget -->
                     <div class="col-md-3">
                         <div class="footer-widget">
-                            <h3>Company Essentials</h3>
-                            <ul>
-                                <li><a href="#">Help Center</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Hot Deals</a></li>
-                                <li><a href="#">About Us</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Footer Widget -->
-                    <div class="col-md-3">
-                        <div class="footer-widget">
-                            <h3>About Pushpo</h3>
+                            <h3>About EXPRESIO</h3>
                             <div class="address">
                                 <div class="address-box clearfix">
                                     <span class="lnr lnr-home"></span>
-                                    <p>1502 N Elm St, Fairmont, MN 56031 United States</p>
+                                    <p>HYDERABAD TELANGANA INDIA</p>
                                 </div>
                                 <div class="address-box clearfix">
                                     <span class="lnr lnr-phone"></span>
-                                    <p><a href="tel:015110022">+00 123-456-789</a>
+                                    <p><a href="tel:9381132562">9381132562</a>
                                     <br>
-                                    <a href="tel:015110022">+00 123-456-789</a></p>
+                                    <a href="tel:015110022"></a></p>
                                 </div>
                                 <div class="address-box clearfix">
                                     <span class="lnr lnr-envelope"></span>
-                                    <p><a href="mailto:email@yourdomain.com">email@yourdomain.com</a></p>
+                                    <p><a href="mailto:noreply.blogzz@gmail.com">noreply.blogzz@gmail.com</a>
                                 </div>
                                 
                             </div>
                         </div>
                     </div>
-
+    
                 </div>
-
+    
             </div>            
         </div>
-
+    
         <div class="clearfix"></div>
-
+    
         <!-- Footer Bottom area -->
         <div class="footer-bottom-area">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <p>Copyright &copy; 2018. All rights reserved to <a href="#">CodersPoint</a></p>
+                        <p>Copyright &copy; 2020. All rights reserved to <a href="#">EXPRESIO</a></p>
                     </div>
                     
                 </div>
             </div>
         </div>
-
+    
     </footer>
     <!-- Footer area ends -->
 

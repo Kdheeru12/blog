@@ -17,22 +17,18 @@
                         {% csrf_token %}
                         <h2>SIGN UP</h2>
                         <input type="text" placeholder="UserName"  required name="username">
-                        <input type="text" placeholder="FirstName" onkeyup="letters(this)" required name="first">
-                        <input type="text" placeholder="LastName" onkeyup="letters(this)" required name="last">
+                        <input type="text" placeholder="Name" onkeyup="letters(this)" required name="first">
+                        <input type="text" placeholder="LastName" onkeyup="letters(this)"  name="last" hidden readonly>
                         <input type="email" placeholder="Email_Id" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required name="email"  name="email">
-                        <input type="text" placeholder="PhoneNumber" pattern="[6-9]{1}[0-9]{9}" name="phone">
-                        <input type="password" placeholder="Password" required name="password">
-                        <input type="date" id="birthday" name="date">
                         <button type="submit">Signup</button>
-                        <p class="signup">login and enjoy reading <a href="login">LOGIN</a></p>
-                        <div>
                             {% for message in messages%}
                             <span class="message">{{message}}</span>
                             {% endfor %}
-                        </div>
+                        
+                        <p class="signup">login and enjoy reading <a href="login">LOGIN</a></p>
                     </form>
+                   
                 </div>
-            
             </div>
             
         </div>
