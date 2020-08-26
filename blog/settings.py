@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
     'django_ckeditor_5',
-    'ckeditor_uploader',
     'taggit'
 
 ]
@@ -124,6 +124,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 MEDIA_URL = '/media/'
@@ -182,7 +183,7 @@ CKEDITOR_5_CONFIGS = {
         'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|', 'outdent', 'indent','alignment','|' 'highlight', '|',
                     'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', 'imageUpload', '|',
                      'removeFormat',
-                    'insertTable','|','code','subscript', 'superscript','mediaEmbed','CodeSnippet','SpecialCharacters','SpecialCharactersEssentials', 'SpecialCharactersEmoji'],
+                    'insertTable','|','code','subscript', 'superscript','mediaEmbed','CodeSnippet','insert','SpecialCharacters','SpecialCharactersEssentials', 'SpecialCharactersEmoji'],
         
         'image': {
             'toolbar': ['imageTextAlternative', 'imageTitle', '|', 'imageStyle:alignLeft', 'imageStyle:full',
@@ -216,7 +217,5 @@ CKEDITOR_5_CONFIGS = {
                 { 'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3' }
             ]
         },
-        
-        
     }
 }
