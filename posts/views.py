@@ -355,6 +355,5 @@ def contact(request):
             ['dheerukreddy@gmail.com'],
             )
         messages.info(request,'Your Query Has been Sucessfully Recoded We will contact You soon')
-        
         return redirect('/contact-us')   
     return render(request,'contact.html')

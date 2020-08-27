@@ -61,7 +61,7 @@ pre_save.connect(pre_save_post_receiver,sender=Post)
 class blog(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,default=1,on_delete=models.CASCADE)    
     title = models.CharField(max_length=400)
-    content = CKEditor5Field()
+    content = RichTextField(blank=True,null=True)
 class Video(models.Model):
     url = models.CharField(max_length=800)
 class Userprofile(models.Model):
