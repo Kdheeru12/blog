@@ -80,12 +80,14 @@
                             <div class="navbar-collapse collapse">
                                 <nav>
                                     <ul class="nav navbar-nav navbar-right">
+                                        <li><a href="/createpost">CREATE POST</a></li>
                                         <li><a href="/myposts">MY BLOGS</a></li>
                                         <li><a href="/blogs">EXPLORE BLOGS</a></li>
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROFILE<b class="caret"></b></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="/profile">MY PROFILE</a></li>
+                                                <li><a href="/password_change">Change Password</a></li>
                                                 <li><a href="/logout">LOGOUT</a></li>
                                             </ul>
                                         </li>
@@ -152,10 +154,10 @@
 
                 <!--Blog details pagination -->
                 <div class="details-pagination text-center">
-
-                    <a href="#"><span class="lnr lnr-arrow-left"></span> Prev Post</a>
-                    <a href="#">Next Post <span class="lnr lnr-arrow-right"></span></a>
-
+                    <a href="#"><span class="lnr lnr-arrow-right"></span>POSTS TAGS</a>
+                    {% for tag in instance.tags.all %}
+                    <a href="{% url 'tags' tag.slug %}">#{{tag}}</a>
+                    {% endfor %}
                  </div>
 
                 <!-- Comments ---->
@@ -256,12 +258,11 @@
 
         
                  <!-- widget post categories -->
-
                  <div class="widget widget-post-categories">
                     <h3>Post Categories</h3>
                     <ul class="post-categorie">
                         <form action="/blogs">  
-                         <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Art & Culture"/></li>
+                         <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="query" value="Art & Culture"/></li>
                          <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Beauty & Fashion"/></li>
                          <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Sports"/></li>
                          <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Lifestyle"/></li>
@@ -270,24 +271,18 @@
                         </form>
                     </ul>
                 </div>
-
                  <!-- widget post tags -->
-
-                 <div class="widget widget-tags">
-                    <h3>Post Tags</h3>
+                <div class="widget widget-tags">
+                    <h3>POPULAR Post Tags</h3>
                     <ul class="post-tags">
-                        <form action="/blogs">  
-                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Art & Culture"/></li>
-                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Beauty & Fashion"/></li>
-                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Sports"/></li>
-                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Lifestyle"/></li>
-                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Technology"/></li>
-                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Economics"/></li>
+                        <form action="/tags">  
+                            {% for com in common_tags %}
+                            <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#{{com.slug}}"/></li>
+                            {% endfor %}
                         </form>
     
                     </ul>
                 </div> 
-
            </div>
        </div>
     </section>

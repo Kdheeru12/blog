@@ -200,6 +200,7 @@ def postdetail(request,slug=None):
         return redirect('signup')
     else:
         instance = get_object_or_404(Post,slug=slug)
+        tag = Tag.objects.filter()
         is_liked =False
         print(instance.user)
         profile = get_object_or_404(Userprofile,user=instance.user)
@@ -226,6 +227,7 @@ def postdetail(request,slug=None):
 
         if instance.likes.filter(username=request.user).exists():
             is_liked = True
+        common_tags = Post.tags.most_common()[:8]
         context = {
             "title": instance.title,
             "instance": instance,
@@ -234,6 +236,7 @@ def postdetail(request,slug=None):
             "total_likes":instance.total_likes(),
             "profile":profile,
             "com":com,
+            'common_tags':common_tags,
         }
         return render(request,"detail1.html",context)
 def likes(request):
@@ -404,6 +407,22 @@ def tags(request):
     tags = request.GET['q']
     tags = tags.replace('#','')
     tag = get_object_or_404(Tag,slug=tags)
+    print(tag)
+    post=Post.objects.filter(draft=False,tags=tag)
+    print(post)
+    post_list = Post.objects.filter(draft=False,tags=tag)
+    common_tags = Post.tags.most_common()[:8]
+    paginator = Paginator(post_list, 10) # Show 25 contacts per page.
+    
+    page_number = request.GET.get('page')
+    post = paginator.get_page(page_number)
+    context = {
+        'post':post,
+        'common_tags':common_tags,
+    }
+    return render(request,'blog.html',context)
+def tagsslug(request,slug):
+    tag = get_object_or_404(Tag,slug=slug)
     print(tag)
     post=Post.objects.filter(draft=False,tags=tag)
     print(post)
