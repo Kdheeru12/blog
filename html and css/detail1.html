@@ -161,7 +161,7 @@
                 <!-- Comments ---->
 
                 <div class="comments">
-                    <h3 class="text-center">03 Comments</h3>
+                    <h3 class="text-center">{{com}} Comments</h3>
                     <ul class="comments-tree">
                         {% for cm in comments %}
                         <li>
@@ -169,13 +169,14 @@
                                 <div class="comment-content clearfix">
                                     <img src="assets/img/blog/comment1.jpg" alt="">
                                     <h4>{{cm.0.user.first_name}}</h4>
-                                    <span>{{cm.0.time}} -</span>
+                                    <span>{{cm.0.time|timesince}} -</span>
                                 </div>
                                 <p>{{cm.0.comm}} </p>
+                                {%if user.is_authenticated %}
                                <p id="{{cm.0.id}}" >
                                 <button  onclick="ReplyForm('{{cm.0.id}}')" class="form-btn blog-gradient">Reply</button>
                                </p> 
-                                
+                                {% endif %}
                             </div>
                             <ul class="depth">
                                 {% for subc in cm.1  %}
@@ -184,7 +185,7 @@
                                     <div class="comment-content clearfix">
                                         <img src="assets/img/blog/comment2.jpg" alt="">
                                         <h4>{{subc.user.first_name}}</h4>
-                                        <span>{{subc.time}} - </span>
+                                        <span>{{subc.time|timesince}} - </span>
                                     </div>
                                     <p>{{subc.comm}}</p>
                                 </div>
@@ -202,7 +203,7 @@
           
                                 <div class="row">
                                     <input type='text' value='${id}' name = 'comm_id' hidden/>
-                                    <textarea style="font-size:15px;" name="comm"class="form-control" placeholder="Your View"></textarea>
+                                    <textarea style="font-size:15px;" name="comm"class="form-control" placeholder="Leave a Comment"></textarea>
                                     
                                     
                                 </div>
@@ -215,13 +216,14 @@
                             document.getElementById(id).innerHTML = elm;
                         }
                     </script>
+                    {%  if user.is_authenticated %}
                     <form method='POST' class="comment-form">
                         {% csrf_token %}
                         <h3 class="text-center">Post a Comments</h3>
   
                         <div class="row">
 
-                            <textarea style="font-size:15px;" name="comm"class="form-control" placeholder="Your View"></textarea>
+                            <textarea style="font-size:15px;" name="comm"class="form-control" placeholder="Leave A Comment"></textarea>
                             
                         </div>
                         <div class="row">
@@ -230,7 +232,10 @@
                             </div>
                         </div>
                     </form>
-                    
+                    {% else %}
+                   <a href="/login" target="_blank">  <h3 class="text-center">login to  Comment</h3> </a>
+                    <span class="text-center">Try refreshing if you have logged in</span>
+                   {% endif %}
                 </div>
 
         </div>

@@ -29,7 +29,7 @@ class Post(models.Model):
     def __unicode__(self):
         return self.title
     def __str__(self):
-        return self.title
+        return self.slug
 
     def get_absolute_url(self):
         return "/%s/post-detail/" %(self.slug)

@@ -195,6 +195,8 @@ def postdetail(request,slug=None):
         print(instance.user)
         profile = get_object_or_404(Userprofile,user=instance.user)
         print(profile)
+        post = get_object_or_404(Post,slug=slug)
+        com = Comment.objects.filter(post=post).count
         if request.method=='POST':
             comm = request.POST.get('comm')
             comm_id = request.POST.get('comm_id')
@@ -205,8 +207,10 @@ def postdetail(request,slug=None):
                     comm = comm,
                     comment = Comment.objects.get(id=int(comm_id))
                 ).save()
+                return redirect('/'+str(slug)+'/post-detail')
             else:
                 Comment(post=instance,user=request.user,comm=comm).save()
+                return redirect('/'+str(slug)+'/post-detail')
         comments = []
         for c in Comment.objects.filter(post=instance):
             comments.append([c,SubComment.objects.filter(comment=c)])
@@ -220,6 +224,7 @@ def postdetail(request,slug=None):
             "is_liked" :is_liked,
             "total_likes":instance.total_likes(),
             "profile":profile,
+            "com":com,
         }
         return render(request,"detail1.html",context)
 def likes(request):
