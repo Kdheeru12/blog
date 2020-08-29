@@ -11276,12 +11276,14 @@ body:after {
 				<p>
           {% if user1.about_me %}
                     {{user1.about_me}}
-          {% end if %}
+          {% endif %}
 				</p>
 				<div class="buttn-about">
                                 <a href="/">Home Page</a>
-								<a href="/profile-edit">EDIT PROFILE</a>
-                                
+                <a href="/profile-edit">EDIT PROFILE</a>
+                {% if user.email == '' %}
+                <a href="/add-email"> ADD EMAIL</a>
+                {% endif %}                
                             </div>
 							<div class="buttom-social-grids">
 
@@ -11315,7 +11317,10 @@ body:after {
 						</li>
 						<li>
 							<ul class="address-text">
-								<li><b>E-MAIL </b></li>
+                <li><b>E-MAIL </b></li>
+                {%  if user.email == '' %}
+                ddd
+                {% endif  %}
 								<li><a>:{{user.email}}</a></li>
 							</ul>
 						</li>

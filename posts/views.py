@@ -369,3 +369,19 @@ def contact(request):
         messages.info(request,'Your Query Has been Sucessfully Recoded We will contact You soon')
         return redirect('/contact-us')   
     return render(request,'contact.html')
+def addemail(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        if User.objects.filter(email=email).exists():
+            messages.info(request,'EMAIL ALREADY EXISTS')
+            return redirect('/add-email')
+        else:
+            instance = get_object_or_404(User,username=request.user)
+            instance.email = email
+            instance.save()
+            return redirect('/profile')
+    else:
+        if request.user.is_authenticated:
+            return render(request,'add-email.html')
+        else:
+            return redirect('/')

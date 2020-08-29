@@ -1,0 +1,33 @@
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="user signinbox">
+                <div class="imagebox"><img src="{% static 'css/images/bgg.jpg' %}" alt=""></div>
+                <div class="formbox">
+                    <form action="/add-email" method="POST">
+                        {% csrf_token %}
+                        <h2>ADD EMAIL</h2>
+                        <input type="email" placeholder="Email_Id" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required name="email" >
+                        <button type="submit">AddEmail</button>
+                        <p style="color: red;" class="signup" >*note that this email is used for password recovery</p>  
+                    </form>
+                    {% for message in messages%}
+                    <span class="message">{{message}}</span>
+                    {% endfor %}
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

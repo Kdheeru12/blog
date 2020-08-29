@@ -27,10 +27,3 @@ urlpatterns = [
     path("ckeditor5/", include('django_ckeditor_5.urls')),
     path('accounts/', include('allauth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-if not settings.DEBUG:
-    urlpatterns += [
-        path('media/')', serve,{'document_root': settings.MEDIA_ROOT}),
-        path('static/)', serve,{'document_root': settings.STATIC_ROOT}),
-    ]
