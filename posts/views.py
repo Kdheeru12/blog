@@ -23,6 +23,7 @@ import json
 from django.http import HttpResponse
 from taggit.models import Tag
 def homepage(request):
+    """
     post=Post.objects.all()
     post_list = Post.objects.all()
     print(post)
@@ -38,7 +39,18 @@ def homepage(request):
     
     page_number = request.GET.get('page')
     post = paginator.get_page(page_number)
-    return render(request,'index2.html',{'post':post})
+    """
+    if request.user.is_authenticated:
+        try:
+            profile = get_object_or_404(Userprofile,user=request.user)
+        except:
+            user_profile = Userprofile(user=request.user,username=request.user)
+            user_profile.save()
+        if request.user.is_staff ==False :
+            instanace = get_object_or_404(User,username=request.user)
+            instanace.is_staff = True
+            instanace.save()
+    return render(request,'index2.html')
 def blogs(request):
     post=Post.objects.filter(draft=False)
     post_list = Post.objects.filter(draft=False)
@@ -104,8 +116,10 @@ def verification(request):
             password = request.POST['password']
             messages.info(request,'otp verified')
             user = User.objects.create_user(username=email,password=password,email=email,first_name=first_name,last_name=last_name)
-            user_profile = Userprofile(user=email,username=username)
             user.save()
+            profile = get_object_or_404(User,email=email)
+            print(profile)
+            user_profile = Userprofile(user=profile,username=username)
             user_profile.save()
             return redirect('login')
         elif user == True:
@@ -179,8 +193,7 @@ def postdetail(request,slug=None):
         instance = get_object_or_404(Post,slug=slug)
         is_liked =False
         print(instance.user)
-        name = get_object_or_404(User,username=instance.user)
-        profile = get_object_or_404(Userprofile,user=str(instance.user))
+        profile = get_object_or_404(Userprofile,user=instance.user)
         print(profile)
         if request.method=='POST':
             comm = request.POST.get('comm')
@@ -207,7 +220,6 @@ def postdetail(request,slug=None):
             "is_liked" :is_liked,
             "total_likes":instance.total_likes(),
             "profile":profile,
-            "name":name,
         }
         return render(request,"detail1.html",context)
 def likes(request):
@@ -316,7 +328,7 @@ def test(request):
     #    return redirect('login')
 def profileedit(request):
     if request.user.is_authenticated:
-        instance = get_object_or_404(Userprofile,user=str(request.user))
+        instance = get_object_or_404(Userprofile,user=request.user)
         form = UserprofileForm(request.POST or None,request.FILES or None,instance=instance)
         if form.is_valid():
             instance = form.save(commit=False)
