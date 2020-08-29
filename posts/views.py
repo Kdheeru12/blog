@@ -11,7 +11,7 @@ from django.db import models
 from .models import Post
 from .models import blog
 from .models import Video
-from .models import Userprofile,Comment,SubComment
+from .models import Userprofile,Comment,SubComment,Categories
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from .form import PostForm
@@ -54,20 +54,28 @@ def homepage(request):
 def blogs(request):
     post=Post.objects.filter(draft=False)
     post_list = Post.objects.filter(draft=False)
-    print(post)
     query = request.GET.get("q")
-    print(query)
-    if query:
+    query1 = request.GET.get("query")
+    if query1:
+        categories = get_object_or_404(Categories,categories=query1)
+        post=Post.objects.filter(draft=False,categories=categories)
+        post_list = Post.objects.filter(draft=False,categories=categories)
+        print(post)
+    elif query:
         post_list = post_list.filter(
             Q(title__icontains=query) |
             Q(content__icontains=query) 
             ).distinct()
-
+    common_tags = Post.tags.most_common()[:8]
     paginator = Paginator(post_list, 10) # Show 25 contacts per page.
     
     page_number = request.GET.get('page')
     post = paginator.get_page(page_number)
-    return render(request,'blog.html',{'post':post})
+    context = {
+        'post':post,
+        'common_tags':common_tags,
+    }
+    return render(request,'blog.html',context)
 def signup(request):
     if request.method == 'POST':
         first_name = request.POST['first']
@@ -159,6 +167,7 @@ def createpost(request):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
+            form.save_m2m()
             
         return redirect('/myposts')
     else:
@@ -277,6 +286,7 @@ def editpost(request,slug=None):
             instance = form.save(commit=False)
             instance.slug = slug
             instance.save()
+            form.save_m2m()
         context = {
             "title": instance.title,
             "instance": instance,
@@ -390,3 +400,21 @@ def addemail(request):
             return render(request,'add-email.html')
         else:
             return redirect('/')
+def tags(request):
+    tags = request.GET['q']
+    tags = tags.replace('#','')
+    tag = get_object_or_404(Tag,slug=tags)
+    print(tag)
+    post=Post.objects.filter(draft=False,tags=tag)
+    print(post)
+    post_list = Post.objects.filter(draft=False,tags=tag)
+    common_tags = Post.tags.most_common()[:8]
+    paginator = Paginator(post_list, 10) # Show 25 contacts per page.
+    
+    page_number = request.GET.get('page')
+    post = paginator.get_page(page_number)
+    context = {
+        'post':post,
+        'common_tags':common_tags,
+    }
+    return render(request,'blog.html',context)

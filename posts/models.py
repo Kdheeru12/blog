@@ -15,6 +15,10 @@ import datetime
 from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 # Create your models here. 
+class Categories(models.Model):
+    categories=models.CharField(max_length=100,unique=True)
+    def __str__(self):
+        return self.categories
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,default=1,on_delete=models.CASCADE)    
     title = models.CharField(max_length=400)
@@ -25,7 +29,8 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True,auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False,auto_now_add=True)
     draft = models.BooleanField(default=False)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
+    categories = models.ForeignKey(Categories,blank=True,null=True,on_delete=models.CASCADE)
     def __unicode__(self):
         return self.title
     def __str__(self):
@@ -85,4 +90,3 @@ class SubComment(models.Model):
     time = models.DateTimeField(auto_now=True)
     comm = models.TextField()   
     comment = models.ForeignKey(Comment,on_delete=models.CASCADE)
-    

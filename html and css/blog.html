@@ -176,6 +176,15 @@
                 Posts Matching "{{request.GET.q}}""
             </p>
             {% endif  %}
+            {% if request.GET.query == '' %}
+
+            {% elif request.GET.query == None %}
+            
+            {% else  %}
+            <p>
+                Posts Matching "{{request.GET.query}}""
+            </p>
+            {% endif  %}
             {%for Post  in post %}
             <!-- Single Post default -->
         <a href="/{{Post.slug}}/post-detail" style="color: black;" >
@@ -245,8 +254,8 @@
             <div class="widget widget-post-categories">
                 <h3>Post Categories</h3>
                 <ul class="post-categorie">
-                    <form action="blogs">  
-                     <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Art & Culture"/></li>
+                    <form action="/blogs">  
+                     <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="query" value="Art & Culture"/></li>
                      <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Beauty & Fashion"/></li>
                      <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Sports"/></li>
                      <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="Lifestyle"/></li>
@@ -258,13 +267,10 @@
             <div class="widget widget-tags">
                 <h3>Post Tags</h3>
                 <ul class="post-tags">
-                    <form action="/blogs">  
-                        <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Art & Culture"/></li>
-                        <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Beauty & Fashion"/></li>
-                        <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Sports"/></li>
-                        <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Lifestyle"/></li>
-                        <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Technology"/></li>
-                        <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#Economics"/></li>
+                    <form action="/tags">  
+                        {% for com in common_tags %}
+                        <li><input style="color: black;" id='search-bar' type='submit' placeholder='Search...' autocomplete="off" name="q" value="#{{com.slug}}"/></li>
+                        {% endfor %}
                     </form>
 
                 </ul>

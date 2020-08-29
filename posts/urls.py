@@ -34,6 +34,7 @@ urlpatterns = [
     path('logout',views.logout,name='logout'),
     path('error',views.error,name='error'),
     path('test',views.test,name='test'),
+    path('tags',views.tags,name='tags'),
     path('profile',views.profile,name='profile'),
     path('profile-edit',views.profileedit,name='yourprofile'),
     path('contact-us',views.contact,name='contact'),

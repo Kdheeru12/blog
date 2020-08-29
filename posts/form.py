@@ -4,16 +4,21 @@ from .models import blog
 from .models import Userprofile
 from .models import Userprofile
 from django_ckeditor_5.widgets import CKEditor5Widget
+from taggit.managers import TaggableManager
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = [
             "title",
             "content",
-            "draft"
+            "tags",
+            "draft",
+            "categories"
         ]
         widgets = {
             "title": forms.TextInput(attrs={'class':'form-control'}),
+            "tags": forms.TextInput(attrs={'class':'form-control'}),
+            "categories": forms.Select(attrs={'class':'form-control'}),
             "content": CKEditor5Widget()
             
         }
