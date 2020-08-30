@@ -36,6 +36,7 @@ urlpatterns = [
     path('test',views.test,name='test'),
     path('tags',views.tags,name='tag'),
     path('tags/<slug>',views.tagsslug,name='tags'),
+    path('serialized/<slug>',views.post_serialized_view,name='serialized'),
     path('profile',views.profile,name='profile'),
     path('profile-edit',views.profileedit,name='yourprofile'),
     path('contact-us',views.contact,name='contact'),

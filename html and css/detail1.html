@@ -1,4 +1,5 @@
 {%  load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +11,10 @@
     <meta name="description"    content="Pushpo - Creative App Landing Page">
     <meta name="keywords"       content="Apps, Software, technology, landing page, business, responsive, onepage, corporate, clean">
     <meta name="author"         content="Coderspoint">
-
+    
     <!-- Site title -->
     <title>Pushpo - Creative App Landing Page</title>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href=" {% static 'assets/img/favicon.jpeg' %} ">
 
@@ -159,7 +160,64 @@
                     <a href="{% url 'tags' tag.slug %}">#{{tag}}</a>
                     {% endfor %}
                  </div>
+                <form action=" {% url 'likes' %} " method="POST" class='ddd' id="{{instance.id}}">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_pk" id="post_pk" value="{{instance.pk}}" >
+                    <button type="submit" class="btn btn--primary like-btn{{instance.id}}"> 
+                        {% if request.user in instance.likes.all %}
+                        UnLike
+                        {% else %}
+                        Like
+                        {% endif %}
+                    </button>
+                </form>
 
+                <script>          
+                    $(document).ready(function(){
+                        $('.ddd').submit(function(e){
+                            e.preventDefault()
+                            const post_id = $(this).attr('id')
+                            const LikeText = $(`.like-btn${post_id}`).text()
+                            const trim = $.trim(LikeText)
+                            const url =  $('.ddd').attr('action')
+                            $.ajax({
+                                type: 'POST',
+                                url: url,
+                                data:{
+                                    'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                                    'post_pk':post_id,   
+                                },
+                                success: function(){
+                                    console.log('suceess')
+                                    $.ajax({
+                                        type:'GET',
+                                        url:'/serialized/{{instance.slug}}',
+                                        success:function(response){
+                                            $.each(response,function(index,element)
+                                            {
+                                                   
+                                                if(post_id==element.id){
+                                                    if(trim =='Like') {
+                                                        $(`.like-btn${post_id}`).html('UnLike')
+                                                } else if(trim =='UnLike'){
+                                                    $(`.like-btn${post_id}`).html('Like')
+                                                } else{
+                                                    console.log('oops')
+                                                }
+                                            }
+                                            })
+                                            
+                                        }
+                                    })
+                                },
+                                error:function(error){
+                                    console.log('error',error)
+                                }
+                            })                         
+
+                        })
+                    })
+                </script>
                 <!-- Comments ---->
 
                 <div class="comments">
@@ -382,7 +440,6 @@ s.setAttribute('data-timestamp', +new Date());
 })();
 </script>
 -->
-
 
 
 

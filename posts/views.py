@@ -20,7 +20,7 @@ from datetime import datetime
 from django_ckeditor_5.fields import CKEditor5Field
 import os
 import json
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from taggit.models import Tag
 def homepage(request):
     """
@@ -239,6 +239,7 @@ def postdetail(request,slug=None):
             'common_tags':common_tags,
         }
         return render(request,"detail1.html",context)
+"""
 def likes(request):
     slug=request.POST.get('like')
     post = get_object_or_404(Post,slug=request.POST.get('like'))
@@ -253,6 +254,22 @@ def likes(request):
         post.likes.add(request.user)
         is_liked = True
     return HttpResponse('/' + str(slug)+'/post-detail' )
+"""
+def likes(request):
+    user = request.user
+    if request.method == 'POST':
+        pk = request.POST.get('post_pk')
+        post_obj = Post.objects.get(pk=pk)
+        if user in post_obj.likes.all():
+            post_obj.likes.remove(user)
+        else:
+            post_obj.likes.add(user)
+    return HttpResponse()
+def post_serialized_view(request,slug):
+    data = list(Post.objects.filter(slug=slug).values())
+    post =get_object_or_404(Post,slug=slug)
+    print(post.total_likes())
+    return JsonResponse(data,safe=False)
 def myposts(request):
     if request.user.is_authenticated:
         post=Post.objects.filter(user=request.user)
