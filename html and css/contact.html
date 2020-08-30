@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href=" {% static 'css/'  %}  assets1/images/logo4.png" type="image/x-icon">
+  <link rel="shortcut icon" type="image/x-icon" href=" {% static 'assets/img/favicon.jpeg' %} ">
   <meta name="description" content="">
   
   
-  <title>style1</title>
+  <title>CONTACT-US</title>
   <link rel="stylesheet" href=" {% static 'css/assets1/bootstrap/css/bootstrap.min.css'  %}   ">
   <link rel="stylesheet" href=" {% static 'css/assets1/bootstrap/css/bootstrap-grid.min.css'  %}  ">
   <link rel="stylesheet" href=" {% static 'css/assets1/bootstrap/css/bootstrap-reboot.min.css'  %}  ">
@@ -18,7 +18,6 @@
   <link rel="stylesheet" href=" {% static 'css/assets1/theme/css/style.css'  %}   ">
   <link rel="preload" as="style" href=" {% static 'css/assets1/mobirise/css/mbr-additional.css'  %} ">
   <link rel="stylesheet" href="   {% static 'css/assets1/mobirise/css/mbr-additional.css'  %}  " type="text/css">
-
 </head>
 <style>
     body{
@@ -66,7 +65,7 @@
                             <div class="col-md-4  form-group" data-for="name">
                                 <label for="name-form1-k" class="form-control-label mbr-fonts-style display-7">Name</label>
                                 {% if request.user.is_authenticated %}
-                                <input type="text" name="name" data-form-field="Name" required="required" value="{{user.first_name}}" class="form-control display-7" id="name-form1-k">
+                                <input type="text" name="name" data-form-field="Name" required="required" value="{{user.first_name}} {{user.last_name}} " class="form-control display-7" id="name-form1-k">
                                 {% else %}
                                 <input type="text" name="name" data-form-field="Name" required="required" class="form-control display-7" id="name-form1-k">
                                 {% endif %}
@@ -92,6 +91,15 @@
         </div>
     </section>
 </div>
+<script>
+    window.addEventListener("beforeunload", function (e) {
+        var confirmationMessage = 'It looks like you have been editing something. '
+                                + 'If you leave before saving, your changes will be lost.';
+    
+        (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+        return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+    });
+</script>
 <script src="{% static 'asset/web/assets/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'asset/popper/popper.min.js' %}"></script>
 <script src="{% static 'asset/bootstrap/js/bootstrap.min.js' %}"></script>

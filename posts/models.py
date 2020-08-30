@@ -31,6 +31,7 @@ class Post(models.Model):
     draft = models.BooleanField(default=False)
     tags = TaggableManager(blank=True)
     categories = models.ForeignKey(Categories,blank=True,null=True,on_delete=models.CASCADE)
+    countlikes = models.IntegerField(blank=True,null=True)
     def __unicode__(self):
         return self.title
     def __str__(self):

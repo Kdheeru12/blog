@@ -260,15 +260,19 @@ def likes(request):
     if request.method == 'POST':
         pk = request.POST.get('post_pk')
         post_obj = Post.objects.get(pk=pk)
+        post = get_object_or_404(Post,pk=pk)
         if user in post_obj.likes.all():
             post_obj.likes.remove(user)
+            post.countlikes = post_obj.total_likes()
+            post.save()
         else:
             post_obj.likes.add(user)
+            post.countlikes = post_obj.total_likes()
+            post.save()
     return HttpResponse()
 def post_serialized_view(request,slug):
     data = list(Post.objects.filter(slug=slug).values())
     post =get_object_or_404(Post,slug=slug)
-    print(post.total_likes())
     return JsonResponse(data,safe=False)
 def myposts(request):
     if request.user.is_authenticated:

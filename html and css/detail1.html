@@ -13,7 +13,7 @@
     <meta name="author"         content="Coderspoint">
     
     <!-- Site title -->
-    <title>Pushpo - Creative App Landing Page</title>
+    <title>Explore Blogs</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href=" {% static 'assets/img/favicon.jpeg' %} ">
@@ -104,7 +104,7 @@
                                         <li><a class="smooth_scroll" href="/">HOME</a></li>
                                         <li><a  href="/blogs">EXPLORE BLOGS</a></li>
                                         <li><a  href="/login">LOGIN</a></li>
-                                        <li><a class="smooth_scroll" href="signup">SIGNUP</a></li>
+                                        <li><a  href="/signup">SIGNUP</a></li>
                                         <li><a href="/contact-us" class="nav-link" target="_blank">CONTACT</a></li>
                                     </ul>
                                 </nav>
@@ -150,6 +150,7 @@
            <div class="col-md-8">
                <div class="blog-content" style="font-size:18px;" >
                     {{instance.content|safe}}
+                    
                 </div>
                 <!--Blog full width area ends -->
 
@@ -162,10 +163,13 @@
                  </div>
                 <form action=" {% url 'likes' %} " method="POST" class='ddd' id="{{instance.id}}">
                     {% csrf_token %}
+                    <div class="count">
+                        {{instance.countlikes}} Likes
+                    </div>
                     <input type="hidden" name="post_pk" id="post_pk" value="{{instance.pk}}" >
-                    <button type="submit" class="btn btn--primary like-btn{{instance.id}}"> 
+                    <button style="color: black;" type="submit" class="btn btn--primary like-btn{{instance.id}}"> 
                         {% if request.user in instance.likes.all %}
-                        UnLike
+                        UnLike 
                         {% else %}
                         Like
                         {% endif %}
@@ -180,6 +184,8 @@
                             const LikeText = $(`.like-btn${post_id}`).text()
                             const trim = $.trim(LikeText)
                             const url =  $('.ddd').attr('action')
+                            const count = $(`.count`).text()
+                            const trm = $.trim(count)
                             $.ajax({
                                 type: 'POST',
                                 url: url,
@@ -188,19 +194,20 @@
                                     'post_pk':post_id,   
                                 },
                                 success: function(){
-                                    console.log('suceess')
                                     $.ajax({
                                         type:'GET',
                                         url:'/serialized/{{instance.slug}}',
                                         success:function(response){
                                             $.each(response,function(index,element)
                                             {
-                                                   
+
                                                 if(post_id==element.id){
                                                     if(trim =='Like') {
                                                         $(`.like-btn${post_id}`).html('UnLike')
+                                                        $(`.count`).html(element.countlikes +' '+ 'likes')
                                                 } else if(trim =='UnLike'){
                                                     $(`.like-btn${post_id}`).html('Like')
+                                                    $(`.count`).html(element.countlikes +' '+ 'likes')
                                                 } else{
                                                     console.log('oops')
                                                 }
