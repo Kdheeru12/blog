@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Post
 from .models import blog
 from .models import Video
-from .models import Userprofile,Comment,SubComment,Categories
+from .models import Userprofile,Comment,SubComment,Categories,FeedBack
 # Register your models here.
 class PostModelAdmin(admin.ModelAdmin):
     list_display = ["title","updated","timestamp"]
@@ -18,6 +18,8 @@ admin.site.register(Userprofile)
 admin.site.register(Comment)
 admin.site.register(SubComment)
 admin.site.register(Categories)
+admin.site.register(FeedBack)
+
 
 
 
