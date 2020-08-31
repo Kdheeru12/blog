@@ -39,6 +39,7 @@ urlpatterns = [
     path('serialized/<slug>',views.post_serialized_view,name='serialized'),
     path('profile',views.profile,name='profile'),
     path('profile-edit',views.profileedit,name='yourprofile'),
+    path('feedback',views.feedback,name='feedback'),
     path('contact-us',views.contact,name='contact'),
     path('reset_password/',auth_views.PasswordResetView.as_view(template_name='reset_password.html'),name='reset_password'),
     path('reset_password_sent/',auth_views.PasswordResetDoneView.as_view(template_name='password_reset_sent.html'),name='password_reset_done'),

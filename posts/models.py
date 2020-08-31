@@ -91,3 +91,7 @@ class SubComment(models.Model):
     time = models.DateTimeField(auto_now=True)
     comm = models.TextField()   
     comment = models.ForeignKey(Comment,on_delete=models.CASCADE)
+class FeedBack(models.Model):
+    name = models.CharField(max_length=100,blank=True,null=True)
+    rating = models.IntegerField(blank=True,null=True)
+    feedback = models.CharField(max_length=800,blank=True,null=True)

@@ -11,7 +11,7 @@ from django.db import models
 from .models import Post
 from .models import blog
 from .models import Video
-from .models import Userprofile,Comment,SubComment,Categories
+from .models import Userprofile,Comment,SubComment,Categories,FeedBack
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from .form import PostForm
@@ -40,6 +40,7 @@ def homepage(request):
     page_number = request.GET.get('page')
     post = paginator.get_page(page_number)
     """
+    feed = FeedBack.objects.all()
     if request.user.is_authenticated:
         try:
             profile = get_object_or_404(Userprofile,user=request.user)
@@ -50,7 +51,7 @@ def homepage(request):
             instanace = get_object_or_404(User,username=request.user)
             instanace.is_staff = True
             instanace.save()
-    return render(request,'index2.html')
+    return render(request,'index2.html',{'feed':feed})
 def blogs(request):
     post=Post.objects.filter(draft=False)
     post_list = Post.objects.filter(draft=False)
@@ -458,3 +459,13 @@ def tagsslug(request,slug):
         'common_tags':common_tags,
     }
     return render(request,'blog.html',context)
+def feedback(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        rating = request.POST['rate']
+        feedback = request.POST['feedback']
+        feed = FeedBack(name=name,rating=rating,feedback=feedback)
+        feed.save()
+        return redirect('/')
+    else:
+        return redirect('/')
